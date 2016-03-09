@@ -64,9 +64,9 @@
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
 \definecolor{Teal}{RGB}{2,132,130}
 %Uncomment this if you want to show work-in-progress comments
-%\newcommand{\comment}[1]{{\bf \tt  {#1}}}
+\newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
-\newcommand{\comment}[1]{}
+%\newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
 \newcommand{\hfcomment}[1]{\textcolor{Teal}{\comment{Henry: {#1}}}}
@@ -118,15 +118,40 @@ The languages we will be comparing are a subset of Racket called beginning stude
 
 Our work is a part of the ClojurEd project which aims to use Clojure to teach an introductory CS course. One of the project goals is to provide introductory students with understandable error messages. We attempt to achieve this goal by rephrasing Java errors in terms that are familiar to new Clojure programmers. As a simple example, we replace references to specific Java numeric types, such as “int” and “double”, with just the term “number”. The next stage of the project is to evaluate how well the new messages work for beginner programmers. 
 
-In order to evaluate how helpful our error messages are to beginners, we have designed a usability study comparing the proposed and standard Clojure error messages to each other and to Racket error messages. There are very few published usability studies of error messages and very few guidelines for evaluating quality of error messages, thus we have developed methodology for comparing error messages in two similar languages. We evaluate the effectiveness of our error messages by giving students, who are familiar with Racket, erroneous code in both Racket and Clojure. We will then observe how the information presented within the error messages helps them to correct the erroneous code. Effectiveness of error messages will primarily be measured by the number of code smales successfully corrected by students, as well as the number of attempts is takes a student to correct the errors. 
+In order to evaluate how helpful our error messages are to beginners, we have designed a usability study comparing the proposed and standard Clojure error messages to each other and to Racket error messages. There are very few published usability studies of error messages and very few guidelines for evaluating quality of error messages, thus we have developed methodology for comparing error messages in two similar languages. We evaluate the effectiveness of our error messages by giving students, who are familiar with Racket, erroneous code in both Racket and Clojure. We will then observe how the information presented within the error messages helps them to correct the erroneous code. Effectiveness of error messages will primarily be measured by the number of code samples successfully corrected by students, as well as the number of attempts is takes a student to correct the errors. 
 
 In this paper we present the details of the study and the approaches to developing code samples that allow us to compare error messages systems. We also present and discuss preliminary results of the usability study. 
 \emcomment{This would need to be modified after we've finished the paper}
 \newpage
 \setcounter{page}{1}
 
-\section{Introduction and Background}\label{sec:intro}
+\section{Introduction}\label{sec:intro}
+	\hfcomment{Elena}
+	\subsection{Goals}\label{sec:goals}
+	\hfcomment{This needs to describe error messages briefly. Reference previous project.}
+\section{Languages}\label{sec:lang}
+	\hfcomment{Henry}
+	\subsection{Overview of Lisp}\label{sec:lisp}
+	\subsection{Differences between Racket and Clojure}\label{sec:diff}
 
+\section{Usability Study}\label{sec:study}
+	\subsection{Objectives}\label{sec:obj}
+	\hfcomment{Elena}
+	\subsection{Experimental Setup}\label{sec:setup}
+	\hfcomment{Thomas, Sean}
+
+\section{Principles of Question Selection}\label{sec:select}
+	\hfcomment{Henry + Elena}
+	\subsection{Selecting Meaningful Accessible Questions}\label{sec:meaning}
+	\hfcomment{Elena}
+	\subsection{Question parallelism}\label{sec:parallel}
+	\hfcomment{Henry}
+	
+\section{Examples}\label{sec:examples}
+	\hfcomment{Sean, Thomas}
+
+\section{Conclusion}\label{sec:conclusion}
+	\hfcomment{Elena}
 
 \bibliographystyle{acm}
 \bibliography{mics2016}
