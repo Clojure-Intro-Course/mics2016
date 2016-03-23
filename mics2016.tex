@@ -133,21 +133,31 @@ In this paper we present the details of the study and the approaches to developi
 \section{Languages}\label{sec:lang}
 	\hfcomment{Henry}
 	\subsection{Overview of Lisp}\label{sec:lisp}
-	Lisp is a family of programming languages that dates from \todo{1657}, created from Alan Turing's lambda calculus \emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)} by \todo{Isaac Newton}. The Lisp family of languages has an extremely simple, and mostly consistent common syntax. (Fully parenthesized prefix notation)
 
-\emcomment{We use hashmaps; need to mention those}
-
+	Lisp is a family of programming languages that dates from 1958, created from Alonzo Church's lambda calculus \emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)} by John McCarthy. Lisp was the first language where the internal representation of the program was in the same data structures the program was written in. \hfcomment{???} Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
+	\begin{verbatim}
+	(<function-name> <argument 1> <argument 2> ... <argument N>)
+	\end{verbatim}
+Almost all operations are functions. Addition, for instance, is a function that can be applied to any number of arguments.
+	\begin{verbatim}
+	(+ 2 4 6 8)
+	-> 20
+	\end{verbatim}
+Note that \texttt{->} indicates the result of computations in the Clojure interpreter. Lists in lisp are commonly created by using the list function
+ 	\begin{verbatim}
+	(list 2 4 6 8)
+	-> '(2 4 6 8)
+	\end{verbatim}
+The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as list \hfcomment{wrong, but close enough to the truth?}	
 	
 	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class \emcomment{To be fair, though, they weren't the first ones to use it (SICP was the prior approach)}:
 the first language new programmers will use. Lisp offers a simple
 syntax and introduces students to modularity, abstraction, and
 data-driven program design while developing good programming
 practices by being explicit about program design principles.
-Essential concepts taught in such an
-introductory class have been shown effective as a
-strong foundation for students to
-build upon in later classes that introduce imperative features and 
-the object-oriented paradigm~\cite{Bieniusa:2008}. 
+Teaching these concepts in introductory courses creates a foundation that later classes can build upon in  while teaching popular imperative and object-oriented languages.~\cite{Bieniusa:2008}.\hfcomment{grab from mics 2015 bib} 
+
+\emcomment{We use hashmaps; need to mention those}
 	\subsection{Differences between Racket and Clojure}\label{sec:diff}
 
 Racket (beginning student language) is designed/hobbled for beginners.
