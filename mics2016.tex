@@ -136,6 +136,7 @@ In this paper we present the details of the study and the approaches to developi
 	Lisp is a family of programming languages that dates from \todo{1657}, created from Alan Turing's lambda calculus \emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)} by \todo{Isaac Newton}. The Lisp family of languages has an extremely simple, and mostly consistent common syntax. (Fully parenthesized prefix notation)
 
 \emcomment{We use hashmaps; need to mention those}
+
 	
 	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class \emcomment{To be fair, though, they weren't the first ones to use it (SICP was the prior approach)}:
 the first language new programmers will use. Lisp offers a simple
@@ -180,13 +181,11 @@ Outline: \emcomment{I am guessing this isn't the actual paper text:}
 \end{itemize}
 This will give us insight into how students act when presented with the same problem across different languages based on the set of errors that language uses.
 
-
 	The participants in the study will be gathered into a common space \emcomment{Actually, no, they will be working individually} at the start so that we can familiarize the students with Clojure as well as review Racket, which they should already be familiar with at some level. The Racket section will cover basic functionality in Racket such as prefix notation, higher order functions, function definition, and recursion. The Clojure introduction will follow, covering similar topics and how they translate from Racket outlining the underlying similarities with functional languages. Clojures lesson will cover the same material in the syntax of Clojure, with the addition of introducing participants to Clojure's hashes as well. The overall goal of this instructional session is to not only educate the participants such that the problems to be presented to them will be solvable, but also to ensure a relatively similar level of familiarity with both Clojure and Racket. \emcomment{Not sure if it's grammatically correct; in any case very difficult to parse.}
 
 	After the educational part of the study, the participants will be assigned to a computer. They will be directed to a website we have constructed that will present them with problems to solve in both Racket and Clojure. The set of potential problems that any one participant could receive will be randomized and the type of error messages received will be randomized as well. \emcomment{More specifically: they will get each problem in Racket or in Clojure; which problem is in which language will be randomized; also some will be working with the current Clojure messages, and some with ours.}
 Participants will also be allowed to use Racket's IDE and a Clojure project in Lighttable \emcomment{explain}  setup \emcomment{set up? You mean the verb, not the noun, right?} by us ahead of time. The participants will be allocated a timelimit of 30 minutes to answer the questions given. They are allowed to try as many times as needed on each questions and they are allowed to skip past questions with the possibility of coming back to them later on. Once the time limit has expired the participants will no longer be able to submit answers and they will be allowed to leave. After the question period of the study, we will now have a collection of screen captures from each participant detailing the process solving the problems. From these we can begin to gauge the significance of the error messages in their problem solving processes. 
 \emcomment{Followup questions; explain how we are going to evaluate the results.}
-
 
 	
 	
@@ -197,7 +196,7 @@ Participants will also be allowed to use Racket's IDE and a Clojure project in L
 	\hfcomment{Elena}
 	\subsection{Question parallelism}\label{sec:parallel}
 	\hfcomment{Henry}
-	We need to compare similar questions and errors, where possible. We're trying to determine the usefulness of the 
+	both features - don't use vectors, cond, no loop recur in clojure
 \section{Examples}\label{sec:examples}
 	\hfcomment{Sean, Thomas}
 
