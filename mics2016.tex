@@ -171,34 +171,74 @@ Clojure focuses on concurrency.
 	\subsection{Objectives}\label{sec:obj}
 	\hfcomment{Elena}
 	\subsection{Experimental Setup}\label{sec:setup}
-	\hfcomment{Thomas, Sean}
-		\thcomment{Whats going to happen in terms of presenting to students, how they'll get the code, how we'll be using racket vs clojure. Clearly describing what we're doing technical to the point of what students are presented with, what we'll give them overview. Each student will have alternating examples presented. Website presentation to the students. What is being measured from this. Exit questions given to students.}
 
-\emcomment{Levels of questions}
+The study is split into two parts; Racket review and testing, and Clojure education and testing.
+The goal of each section will be to introduce the languages basic functionality and then test the participants ability to correctly answer questions in that language.
 
-Outline: \emcomment{I am guessing this isn't the actual paper text:}
+Outline:
 \begin{itemize}
-\item Students will be given a Racket review
-\item Students will be given a Clojure lesson
-\item Students will be assigned an instructor
-\item Each student will be presented with questions
-\item The questions will be Racket and Clojure questions
-\item The error messages of the Clojure questions will either be our error messages or Clojure's default error messages
-\item The error messages of the Racket questions will always be default Racket
-\item Students will be presented these questions through a website we have set up
-\item The questions will be randomized in order and which student receives what type of errors
-\item The errors students create and their current code will be captured via screencap when they evaluate their code and it returns an error
+\item Participant will be assigned an instructor
+\item Participant will be given a review of Racket
+\item Participant will be given a series of questions in Racket to answer
+\item The error messages of the Racket questions will be the default messages
+\item Participant will be taught an overview of Clojure
+\item Participant will be given a series of questions in Clojure to answer
+\item Each participant will randomly receive only our error messages or  only Clojure's default error messages
+\item The errors participants create and their current code will be captured via screencap at a regular intervals
+\item Each instructor will document their participants actions and errors in general
+\item The participants will be asked a series of questions about the tests at the end
 \end{itemize}
-This will give us insight into how students act when presented with the same problem across different languages based on the set of errors that language uses.
 
-	The participants in the study will be gathered into a common space \emcomment{Actually, no, they will be working individually} at the start so that we can familiarize the students with Clojure as well as review Racket, which they should already be familiar with at some level. The Racket section will cover basic functionality in Racket such as prefix notation, higher order functions, function definition, and recursion. The Clojure introduction will follow, covering similar topics and how they translate from Racket outlining the underlying similarities with functional languages. Clojures lesson will cover the same material in the syntax of Clojure, with the addition of introducing participants to Clojure's hashes as well. The overall goal of this instructional session is to not only educate the participants such that the problems to be presented to them will be solvable, but also to ensure a relatively similar level of familiarity with both Clojure and Racket. \emcomment{Not sure if it's grammatically correct; in any case very difficult to parse.}
+REVIEW
 
-	After the educational part of the study, the participants will be assigned to a computer. They will be directed to a website we have constructed that will present them with problems to solve in both Racket and Clojure. The set of potential problems that any one participant could receive will be randomized and the type of error messages received will be randomized as well. \emcomment{More specifically: they will get each problem in Racket or in Clojure; which problem is in which language will be randomized; also some will be working with the current Clojure messages, and some with ours.}
-Participants will also be allowed to use Racket's IDE and a Clojure project in Lighttable \emcomment{explain}  setup \emcomment{set up? You mean the verb, not the noun, right?} by us ahead of time. The participants will be allocated a timelimit of 30 minutes to answer the questions given. They are allowed to try as many times as needed on each questions and they are allowed to skip past questions with the possibility of coming back to them later on. Once the time limit has expired the participants will no longer be able to submit answers and they will be allowed to leave. After the question period of the study, we will now have a collection of screen captures from each participant detailing the process solving the problems. From these we can begin to gauge the significance of the error messages in their problem solving processes. 
-\emcomment{Followup questions; explain how we are going to evaluate the results.}
+The overall purpose of each instructional session is to both ensure that the participants have enough fundamental knowledge of the language presented to them to have a basic understanding of the problems. 
+In addition, the session should also ensure a relatively similar level of familiarity with both Clojure and Racket among all participants. 
+Each participant in the study will go through the process of reviewing and testing individually in order to minimize outside influence from other participants or distractions. 
+Because of this, the participant's experiences must be parallel with each other both in terms of the environment and the materials provided such as not to create bias.
+The Racket review section will be a reintroduction to participants, as they should already have a base knowledge of Racket from previous courses taken.
+The participants should have little or no knowledge of Clojure when coming into the study, so the Clojure lesson will focus more on drawing similarities from Racket and basic function explanations.
+The core topics to cover for each language are syntax such as prefix notation, higher order functions, function definition, and recursion.
 
-	
-	
+TESTING
+
+After the education part the participants will be assigned to a computer where their actions will be monitored by a reviewer. 
+From here, they will be directed to connect to a website we have constructed that will present them with a series of problems to solve. 
+Participants will not be allowed to consult outside sources, the reviewer, or other participants during this period of the study except for the language's public API. 
+The participants will also have access to either Racket's built-in IDE or a Clojure project in LightTable depending on which language they are being tested on.
+The website they connect to pulls its questions from a set of parallel questions between Clojure and Racket we have constructed, so that for every question in Racket there is an computationally equal question in Clojure and vice-versa.
+Each question pair has a difficulty rating associated with it, with one being the easiest questions and 5 being the hardest questions.
+When a new participant logs into the website, it constructs both the Racket and Clojure tests to present by randomly selecting question-pairs from the pool. 
+The program must choose set amounts of questions from each difficulty, such as three level one questions, one level two question, 2 level three questions, ect, every time it creates tests. 
+As an example of this, assume a student sits down and logs into the website to take a test.
+The website goes to construct the test under the restriction that every set of test questions it creates, no matter what language, must have three level one questions from that language. 
+It checks the pool of level one questions and sees there are seven possible level one question-pairs for the program to use.
+We can think about the pool like this,
+
+LEVEL 1: (C1,R1), (C2,R2), (C3,R3),...,(C7,R7)
+
+where a question pair is C1 (Clojure question 1) and R1 (Racket question 1), which are essentially the same question in different languages. 
+
+The website then randomly selects three level one question-pairs from the seven, removes them from the pool, and adds the Racket version of those questions to the set of Racket questions for the test.
+The website constructs the rest of the Racket test in a similar fashion for each difficulty level by randomly selecting question-pairs, adding the Racket version to the  Racket test, and removing the pair from the pool.
+Even though we are only using the Racket version of the question in the Racket test, we still remove the whole pair from the pool so that we don't end up duplicating questions.
+If we did not remove the pair, our participant could end up with question R1 in their Racket test and C1 in their Clojure test, effectively giving them the same questions twice.
+After the Racket test is made, the website goes to create the Clojure test and moves to add three new level one questions to it.
+Since we have already taken out three question-pairs from the pool of seven, there are only four level one question-pairs left to use.
+The website randomly select three questions out of the remaining four that have not been used and puts them into the Clojure Test.
+In the end our tests for this participant may end up looking something like this; 
+
+Racket Test: R1, R6, R3
+
+Clojure Test: C2, C5, C7
+
+
+	The participants will be allocated a time limit to answer the questions on each test. 
+They are allowed to try as many times as needed on each questions and they are allowed to skip past questions with the possibility of coming back to them later on. 
+Before taking their Clojure test each participant will secretly be assigned to receive either Clojure's default error messages or our custom Clojure error messages.
+While testing, the computer will take a screenshot periodically and the reviewer will take notes on what the participant does while solving the problems.
+After the finishing all of the questions, the participant will be asked a series of questions related to the tests such as, "What part of the tasks were easy for you? What parts were hard?".
+After the question period of the study, we will now have a collection of screen captures from each participant detailing the process solving the problems, notes on their problem solving process, and participant opinion on the challenges of the study.
+From these we can begin to gauge the significance of the error messages in their problem solving processes. 
 
 \section{Principles of Question Selection}\label{sec:select}
 	\hfcomment{Henry + Elena}
