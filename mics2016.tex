@@ -130,7 +130,23 @@ In this paper we present the details of the study and the approaches to developi
 	\hfcomment{Elena}
 
 	\subsection{Goals}\label{sec:goals}
-This work is a part of a larger project on making Clojure more accessible to beginners. In particular, we have developed an alternative system of error messages that do not use 
+This work is a part of a larger project on making Clojure more accessible to beginners. In particular, we have developed an alternative system of error messages that do not use Java datatypes and other terminology that beginner programmers would not be familiar with. 
+\emcomment{a couple of examples}
+
+While these messages seem to be an improvement, we would like to examine two hypotheses about our alternative system of Clojure error messages:
+\begin{enumerate}
+\item It is easier to understand than Clojure native error messages.
+\item It is at least as helpful as the system of error messages in the Racket programming language. \emcomment{do we need to switch this with the next section, or do we give a quick overview of Racket here?}
+\end{enumerate}
+To test these hypotheses, we have developed a comparative usability study that compares our system of error messages to the native Clojure error messages and to those in the Racket programming language. We use a series of erroneous code fragments that the test subjects need to correct, and measure how many fragments they have successfully fixed and how may steps it took them to fix the issue or make edits that make progress towards the solution. 
+Study subjects are undergraduate students with Racket background, with none, or very little, Clojure background. 
+Detailed description of this process is given in Section~\ref{sec:setup}. 
+
+A statistically significant higher number of fixed code fragments and a lower number of attempts for our error messages system, compared to the native Clojure system, would indicate that our error messages are easier for students to understand. Additionally we are measuring the difference between either one of the Clojure error messages systems and the Racket messages. Racket error messages were specifically developed to be helpful for beginners. Thus, a comparison to Racket messages would indicate how our error messages compare to the expectations of error messages for beginner-friendly functional languages. 
+
+\emcomment{Need to mention the IRB exemption somewhere: one of the Racket papers does.}
+
+
 	\hfcomment{This needs to describe error messages briefly. Reference previous project.}
 \section{Languages}\label{sec:lang}
 	\hfcomment{Henry}
