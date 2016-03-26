@@ -340,24 +340,35 @@ From these we can begin to gauge the significance of the error messages in their
 		Make the following function work so that all the test cases below evaluate to true.
 	
 	Clojure code:
+	\begin{verbatim}
 		(defn filter-even [lis] (reduce #(if (even %1) (cons %2 %1) %2) '() lis))
+	\end{verbatim}
 
 	Racket code:
+	\begin{verbatim}
 		(define (filter-even lis) (foldl (lambda (x y) (if (even? y) (cons x y) y)) '() lis))
+	\end{verbatim}
 
 	In this case, both have identical test cases: 
+	\begin{verbatim}
 		(= '(2 4 6 8) (filter-even '(1 2 3 4 5 6 7 8 9)))
 		(= '() (filter-even '(1 3 5 7 9)))
+	\end{verbatim}
 
 	Our error:
+	\begin{verbatim}
 		Error: In function even?, the first argument () must be an integer number but is a list.
+	\end{verbatim}
 
 	Standard Clojure error:
+	\begin{verbatim}
 		CompilerException java.lang.RuntimeException: Unable to resolve symbol: even in this context, 	compiling:(/tmp/form-init1838929281200029831.clj:1:38) 
+	\end{verbatim}
 
 	Racket error:
+	\begin{verbatim}
 		even?: expects integer, given '()
-
+	\end{verbatim}
 
 
 	We have categorized this second example is an easy problem.
@@ -369,26 +380,35 @@ From these we can begin to gauge the significance of the error messages in their
 	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
 		
 	Clojure code:
+	\begin{verbatim}
 		(defn my-length [lst]
  			(if (empty? lst) 0 (+ 1 (my-length (first lst)))))
+	\end{verbatim}
 		
 	Racket code:
+	\begin{verbatim}
 		(define (my-length lst)
   			(cond
  				[(empty? lst) 0]
    				[else (+ 1 (my-length (first lst)))]))
+	\end{verbatim}
 		
 	Clojure test cases:
+	\begin{verbatim}
 		(= (my-length '(5 4 3 2 1)) 5)
 		(= (my-length '()) 0)
 		(= (my-length '(1 3 5 7 9 11)) 6)
-		
+	\end{verbatim}
+	
 	Racket test cases:
+	\begin{verbatim}
 		(equal? (my-length '(5 4 3 2 1)) 5)
 		(equal? (my-length '()) 0)
 		(equal? (my-length '(1 3 5 7 9 11)) 6)
-		
+	\end{verbatim}
+	
 	Our error:
+	\begin{verbatim}
 		Error: Don't know how to create a sequence from a number.
 		Found in file may2015.clj on line 12 at character 1.
         clojure.core/seq (core.clj line 135)
@@ -397,14 +417,19 @@ From these we can begin to gauge the significance of the error messages in their
         intro.may2015/my-length (may2015.clj line 10)
         intro.may2015/eval8694 (may2015.clj line 12)
         intro.core/-main (core.clj line 114)
-		
+			\end{verbatim}
+
 	Standard Clojure error:
+	\begin{verbatim}
 		IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:528)
+	\end{verbatim}
 
 
 	Racket error:
+	\begin{verbatim}
 		first: expects a non-empty list; given: 1
-		
+	\end{verbatim}
+
 
 
 
