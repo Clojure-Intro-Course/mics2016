@@ -134,7 +134,9 @@ In this paper we present the details of the study and the approaches to developi
 	\hfcomment{Henry}
 	\subsection{Overview of Lisp}\label{sec:lisp}
 
-	Lisp is a family of programming languages that dates from 1958, created from Alonzo Church's lambda calculus \emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)} by John McCarthy. Lisp was the first language where the internal representation of the program was in the same data structures the program was written in. \hfcomment{???} Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
+	Lisp is a family of programming languages that dates from 1958, based on Alonzo Church's lambda calculus 
+	%\emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)}
+	 by John McCarthy. Lisp was the first language where the internal representation of the program was in the same data structures the program was written in. \hfcomment{???} Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
 	\begin{verbatim}
 	(<function-name> <argument 1> <argument 2> ... <argument N>)
 	\end{verbatim}
@@ -143,14 +145,19 @@ Almost all operations are functions. Addition, for instance, is a function that 
 	(+ 2 4 6 8)
 	-> 20
 	\end{verbatim}
-Note that \texttt{->} indicates the result of computations in the Clojure interpreter. Lists in lisp are commonly created by using the list function
+Note that \texttt{->} indicates the result of computations in the Lisp interpreter. Lists in lisp are commonly created by using the list function
  	\begin{verbatim}
 	(list 2 4 6 8)
 	-> '(2 4 6 8)
 	\end{verbatim}
 The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as list \hfcomment{wrong, but close enough to the truth?}	
+	\begin{verbatim}
+	(list 2 4 6 8)
+	-> '(2 4 6 8)
+	\end{verbatim}
 	
-	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class \emcomment{To be fair, though, they weren't the first ones to use it (SICP was the prior approach)}:
+	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class
+	\emcomment{To be fair, though, they weren't the first ones to use it (SICP was the prior approach)}:
 the first language new programmers will use. Lisp offers a simple
 syntax and introduces students to modularity, abstraction, and
 data-driven program design while developing good programming
@@ -159,14 +166,59 @@ Teaching these concepts in introductory courses creates a foundation that later 
 
 \emcomment{We use hashmaps; need to mention those}
 	\subsection{Differences between Racket and Clojure}\label{sec:diff}
+	
+Racket \hfcomment{Beginning student language?} and Clojure, while still lisps, satisfy different design goals. 
+Racket is designed for introductory students, while Clojure focuses on concurrency and integration with the Java virtual machine. 
+The differing purposes of these language have created divides in the syntax and idioms of Racket and Clojure.
+ The differences begin at definition of variables; Clojure defines functions with the following syntax
 
-Racket (beginning student language) is designed/hobbled for beginners.
+\begin{verbatim}
+	(defn function-name [<argument 1> ... <argument N>] (expression))
+	e.g
+	(defn plus-four [x] (+ x 4))
+\end{verbatim}
+Racket uses this syntax:
+\begin{verbatim}
+	(define (function-name <argument 1> ... <argument N>) (expression))
+	e.g
+	(define (plus-four x) (+ x 4))
+\end{verbatim}
 
-Clojure is built on the JVM.
+Racket and Clojure both have associative datatypes, and Clojure actually has two. We used hashmaps in the study, simply because they are far more common than the alternative.
+Hashmaps in Clojure are a collection of key-value pairs: 
 
-Clojure is fast.
+\begin{verbatim}
+	{key value, key value, key value}
+\end{verbatim}
 
-Clojure focuses on concurrency.
+Hashmaps commonly use keywords. Keywords are simple names that have a colon in front.
+An example of a hashmap using keywords follows: 
+
+\begin{verbatim}
+	{:a 1, :b 2, :c 3}#<position>
+	
+	(:a {:a 1, :b 2, :c 3})
+	-> 1
+\end{verbatim}
+
+The keywords in the above hashmap are: \texttt{:a}, \texttt{:b}, and \texttt{:c}.
+Keywords are often used as keys within hashmaps. 
+When used as a function on a hashmap, keywords return the value associated with the keyword. 
+In the above example, \texttt{:a} is bound to \texttt{1},\texttt{:b} is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
+
+
+Racket uses structs as its associative datatype, which has the following syntax:
+\begin{verbatim}
+	(struct position (x y))
+	
+	(position 75 42)
+	-> #<position>
+\end{verbatim}
+Structs automatically generate an accessor function for each field in the structure.
+\begin{verbatim}
+	(position-x (position 75 42))
+	-> 75
+\end{verbatim}
 \section{Usability Study}\label{sec:study}
 	\subsection{Objectives}\label{sec:obj}
 	\hfcomment{Elena}
@@ -207,6 +259,12 @@ Participants will also be allowed to use Racket's IDE and a Clojure project in L
 	\subsection{Question parallelism}\label{sec:parallel}
 	\hfcomment{Henry}
 	both features - don't use vectors, cond, no loop recur in clojure
+	One of the overarching themes of this study was the difficulty in creating questions that had similar meaning, errors, and syntax in both Clojure and Racket.
+	 Often, our questions are somewhat less than idiomatic because of the constraints imposed by the short time commitment we intended for the study.
+	  For instance, we only use lists in our questions, where idiomatic Clojure prefers vectors, which combine the best features of arrays and lists.
+	   Reducing the amount of review and potential sources of confusion was paramount. 
+	   For instance, Clojure doesn't support tail recursion properly because of the limitations of the Java virtual machine.
+	    In order to create tail-recursive structures, idiomatic Clojure uses a construct called loop recur to bypass this limitation. \hfcomment{Cond?}
 \section{Examples}\label{sec:examples}
 	\hfcomment{Sean, Thomas}
 
