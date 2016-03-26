@@ -127,7 +127,14 @@ In this paper we present the details of the study and the approaches to developi
 \setcounter{page}{1}
 
 \section{Introduction}\label{sec:intro}
-	\hfcomment{Elena}
+Error messages are the primary form of response that programmers get from malfunctioning programs. 
+Experienced programmers have the background to understand what error messages actually mean, but novices only have the content of the error message. 
+While interactions with errors in a programming language are an essential part of a programmer's experience, quite often error handling in a language is not very well thought through: error messages use inconsistent terminology, are ambiguous or misleading, and do not provide enough detail. 
+Beginner programmers find error messages unhelpful.
+Anecdotal evidence (informal questioning of about 10 CS students and almuni by the authors) indicates that novice programmers often do not even realize that an error message may contain useful information, except perhaps the line number; some ignore these messages entirely. 
+Consistently with the general programming languages community undervaluing of error messages quality, there is very little formal study of usability of error messages for beginners and very little methodology developed. The notable exception is the development and study of beginner-friendly error messages in the Racket programming language \cite{Marceau:2011,Marceau:2011-2}. 
+
+\emcomment{Talk about Clojure errors}
 
 	\subsection{Goals}\label{sec:goals}
 This work is a part of a larger project on making Clojure more accessible to beginners. In particular, we have developed an alternative system of error messages that do not use Java datatypes and other terminology that beginner programmers would not be familiar with. 
