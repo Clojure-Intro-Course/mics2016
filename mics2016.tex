@@ -326,6 +326,80 @@ From these we can begin to gauge the significance of the error messages in their
 	    In order to create tail-recursive structures, idiomatic Clojure uses a construct called loop recur to bypass this limitation. \hfcomment{Cond?}
 \section{Examples}\label{sec:examples}
 	\hfcomment{Sean, Thomas}
+	
+	This first example is categorized as a medium problem. 	
+	
+	Problem statement:
+		Make the following function work so that all the test cases below evaluate to true.
+	
+	Clojure code:
+		(defn filter-even [lis] (reduce #(if (even %1) (cons %2 %1) %2) '() lis))
+
+	Racket code:
+		(define (filter-even lis) (foldl (lambda (x y) (if (even? y) (cons x y) y)) '() lis))
+
+	In this case, both have identical test cases: 
+		(= '(2 4 6 8) (filter-even '(1 2 3 4 5 6 7 8 9)))
+		(= '() (filter-even '(1 3 5 7 9)))
+
+	Our error:
+		Error: In function even?, the first argument () must be an integer number but is a list.
+
+	Standard Clojure error:
+		CompilerException java.lang.RuntimeException: Unable to resolve symbol: even in this context, 	compiling:(/tmp/form-init1838929281200029831.clj:1:38) 
+
+	Racket error:
+		even?: expects integer, given '()
+
+
+
+	We have categorized this second example is an easy problem.
+
+	Problem statement:
+		Make the following function work so that all the test cases below evaluate to true. 
+		
+	The error in this example can be fixed by replacing the function `first` with `rest`.
+	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
+		
+	Clojure code:
+		(defn my-length [lst]
+ 			(if (empty? lst) 0 (+ 1 (my-length (first lst)))))
+		
+	Racket code:
+		(define (my-length lst)
+  			(cond
+ 				[(empty? lst) 0]
+   				[else (+ 1 (my-length (first lst)))]))
+		
+	Clojure test cases:
+		(= (my-length '(5 4 3 2 1)) 5)
+		(= (my-length '()) 0)
+		(= (my-length '(1 3 5 7 9 11)) 6)
+		
+	Racket test cases:
+		(equal? (my-length '(5 4 3 2 1)) 5)
+		(equal? (my-length '()) 0)
+		(equal? (my-length '(1 3 5 7 9 11)) 6)
+		
+	Our error:
+		Error: Don't know how to create a sequence from a number.
+		Found in file may2015.clj on line 12 at character 1.
+        clojure.core/seq (core.clj line 135)
+        clojure.core/empty? (core.clj line 5944)
+        intro.may2015/my-length (may2015.clj line 10)
+        intro.may2015/my-length (may2015.clj line 10)
+        intro.may2015/eval8694 (may2015.clj line 12)
+        intro.core/-main (core.clj line 114)
+		
+	Standard Clojure error:
+		IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:528)
+
+
+	Racket error:
+		first: expects a non-empty list; given: 1
+		
+
+
 
 \section{Conclusion}\label{sec:conclusion}
 	\hfcomment{Elena}
