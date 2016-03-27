@@ -134,6 +134,14 @@ Beginner programmers find error messages unhelpful.
 Anecdotal evidence (informal questioning of about 10 CS students and almuni by the authors) indicates that novice programmers often do not even realize that an error message may contain useful information, except perhaps the line number; some ignore these messages entirely. 
 Consistently with the general programming languages community undervaluing of error messages quality, there is very little formal study of usability of error messages for beginners and very little methodology developed. The notable exception is the development and study of beginner-friendly error messages in the Racket programming language \cite{Marceau:2011,Marceau:2011-2}. 
 
+Clojure is a functional language in the Lisp family released in 2007. 
+Clojure is translated to Java bytecode, employing the Java Virtual Machine (JVM) as its interpreter, and features Java interop: the ability to use Java code directly in Clojure code. 
+It quickly gained popularity, is widely used in industry and in open-source projects, and features a large community of developers with three major early conference (two in the U.S. and one in Europe), as well as numerous smaller gatherings and meetups. 
+
+As a Lisp, Clojure has simple syntax and dynamic type system, and therefore may be a promising option in a functional-first approach to teaching programming \emcomment{add a citation here for FP first}. However, due to its implementation over Java, Clojure is notorious for its cryptic and unintuitive error messages. Clojure errors are just Java exceptions, and therefore are phrased in terms of Java types (e.g. \texttt{java.lang.Number}) and Java operations, such as typecasting. They also come with Java stack trace which can be particularly verbose in Clojure since functional languages tend to have a large number of function calls on the stack. Clojure error messages are often confusing even to experienced programmers, and are a barrier for beginners. 
+
+In the last few years there has been a large community effort to address this issue. Several Clojure IDEs come with their own error processing system that filters our Clojure internal functions from the stack trace. There's been work done on improving error messages for macros \emcomment{cite} However, these improvements address the needs of more experienced programmers by continuing using Java types and more advanced terminology, and leave out those for whom Clojue would serve as the first introduction to programming. Our work on error messages aims at addressing beginners' needs.  
+
 \emcomment{Talk about Clojure errors}
 
 	\subsection{Goals}\label{sec:goals}
