@@ -168,52 +168,51 @@ A statistically significant higher number of fixed code fragments and a lower nu
 
 	\subsection{Overview of Lisp}\label{sec:lisp}
 
-	Lisp is a family of programming languages that dates from 1958, based on Alonzo Church's lambda calculus 
-	%\emcomment{Lisp is definitely based on the lambda calculus, but it wasn't created from it. In particular, lambda calculus is call by name (in its classical form)}
-	 by John McCarthy. Lisp was the first language where the internal representation of the program was in the same data structures the program was written in. \hfcomment{???} Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
+	Lisp is a family of functional programming languages that dates from 1958, developed by John McCarthy based on Alonzo Church's lambda calculus.
+	Lisp was the first where data and program code were internally stored using the same data structure which opened possibilities for manipulating not just data, but also program code, within a program.
+	Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
 	\begin{verbatim}
-	(<function-name> <argument 1> <argument 2> ... <argument N>)
+	(<function-name> <arg 1> <arg 2> ... <arg N>)
 	\end{verbatim}
 Almost all operations are functions. Addition, for instance, is a function that can be applied to any number of arguments.
 	\begin{verbatim}
 	(+ 2 4 6 8)
 	-> 20
 	\end{verbatim}
-Note that \texttt{->} indicates the result of computations in the Lisp interpreter. Lists in lisp are commonly created by using the list function
+Here \texttt{->} indicates the result of computations in the Lisp interpreter. 
+
+Lists in Lisp are commonly created by using the list function
  	\begin{verbatim}
 	(list 2 4 6 8)
 	-> '(2 4 6 8)
 	\end{verbatim}
-The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as list \hfcomment{wrong, but close enough to the truth?}	
+The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as list \emcomment{as data storage?} \hfcomment{wrong, but close enough to the truth?} \emcomment{yes}	
 	\begin{verbatim}
 	(list 2 4 6 8)
 	-> '(2 4 6 8)
 	\end{verbatim}
 	
-	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class
-	\emcomment{To be fair, though, they weren't the first ones to use it (SICP was the prior approach)}:
-the first language new programmers will use. Lisp offers a simple
-syntax and introduces students to modularity, abstraction, and
-data-driven program design while developing good programming
-practices by being explicit about program design principles.
-Teaching these concepts in introductory courses creates a foundation that later classes can build upon in  while teaching popular imperative and object-oriented languages.~\cite{Bieniusa:2008}.\hfcomment{grab from mics 2015 bib} 
-
-\emcomment{We use hashmaps; need to mention those}
+	The use of Lisp in teaching computer science starts with the Structure and Interpretation of Computer Programs, a 1985 textbook that aimed to identify general patterns instead of learning the details of a specific programming language. 
+	Structure and Interpretation of Computer Programs used Scheme, another variant of Lisp as the language of instruction. The influence of this textbook continues in the form of How to Design Programs, which is the textbook that uses Racket. 
+	Felleisen et al~\cite{Felleisen:2004} have made an excellent case for using a Lisp as a programming language in an introductory CS class as the first language new programmers will use.
+	 Lisp offers a simple syntax and introduces students to modularity, abstraction, and data-driven program design while developing good programming practices by being explicit about program design principles.
+	 Teaching these concepts in introductory courses creates a foundation that later classes can build upon in  while teaching popular imperative and object-oriented languages.~\cite{Bieniusa:2008}.
+	 
 	\subsection{Differences between Racket and Clojure}\label{sec:diff}
 	
-Racket \hfcomment{Beginning student language?} and Clojure, while both still lisps, satisfy different design goals. 
-Racket is designed for introductory students, while Clojure focuses on concurrency and integration with the Java virtual machine. 
+Racket and Clojure, while still Lisps, satisfy different design goals. 
+Racket features a set of languages with limited subsets of the full language that allow instructors to slowly introduce features to students.Clojure focuses on concurrency and integration with the Java virtual machine. 
 The differing purposes of these language have created divides in the syntax and idioms of Racket and Clojure.
  The differences begin at definition of variables; Clojure defines functions with the following syntax
 
 \begin{verbatim}
-	(defn function-name [<argument 1> ... <argument N>] (expression))
+	(defn function-name [<arg 1> ... <arg N>] (expression))
 	e.g
 	(defn plus-four [x] (+ x 4))
 \end{verbatim}
 Racket uses this syntax:
 \begin{verbatim}
-	(define (function-name <argument 1> ... <argument N>) (expression))
+	(define (function-name <arg 1> ... <arg N>) (expression))
 	e.g
 	(define (plus-four x) (+ x 4))
 \end{verbatim}
@@ -225,30 +224,30 @@ Hashmaps in Clojure are a collection of key-value pairs:
 	{key value, key value, key value}
 \end{verbatim}
 
-Hashmaps commonly use keywords. Keywords are names that have a colon in front.
+Hashmaps commonly use keywords. Keywords are simple names that have a colon in front. Keywords are often used as keys within hashmaps. 
+When used as a function on a hashmap, keywords return the value associated with the keyword. 
 An example of a hashmap using keywords follows: 
 
 \begin{verbatim}
-	{:a 1, :b 2, :c 3}#<position>
+	{:a 1, :b 2, :c 3}
 	
 	(:a {:a 1, :b 2, :c 3})
 	-> 1
 \end{verbatim}
 
 The keywords in the above hashmap are: \texttt{:a}, \texttt{:b}, and \texttt{:c}.
-Keywords are often used as keys within hashmaps. 
-When used as a function on a hashmap, keywords return the value associated with the keyword. 
+
 In the above example, \texttt{:a} is bound to \texttt{1},\texttt{:b} is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
 
 
-Racket uses structs as its associative datatype, which has the following syntax:
+Racket uses structures as its associative datatype, which has the following syntax:
 \begin{verbatim}
 	(struct position (x y))
 	
 	(position 75 42)
 	-> #<position>
 \end{verbatim}
-Structs automatically generate an accessor function for each field in the structure.
+Structs automatically generate an accessor function, such as \texttt{position-x} for each field in the structure. Racket's \texttt{struct} defines a type of structure and the name of it's fields. The name of the struct is then used as a constructor function. Unlike hashmaps, structs cannot be extended at runtime; elements can be removed, added, or replaced in hashmaps, but not in structs.
 \begin{verbatim}
 	(position-x (position 75 42))
 	-> 75
