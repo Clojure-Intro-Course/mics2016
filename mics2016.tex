@@ -127,14 +127,7 @@ In this paper we present the details of the study and the approaches to developi
 \setcounter{page}{1}
 
 \section{Introduction}\label{sec:intro}
-Error messages are the primary form of response that programmers get from malfunctioning programs. 
-Experienced programmers have the background to understand what error messages actually mean, but novices only have the content of the error message. 
-While interactions with errors in a programming language are an essential part of a programmer's experience, quite often error handling in a language is not very well thought through: error messages use inconsistent terminology, are ambiguous or misleading, and do not provide enough detail. 
-Beginner programmers find error messages unhelpful.
-Anecdotal evidence (informal questioning of about 10 CS students and almuni by the authors) indicates that novice programmers often do not even realize that an error message may contain useful information, except perhaps the line number; some ignore these messages entirely. 
-Consistently with the general programming languages community undervaluing of error messages quality, there is very little formal study of usability of error messages for beginners and very little methodology developed. The notable exception is the development and study of beginner-friendly error messages in the Racket programming language \cite{Marceau:2011,Marceau:2011-2}. 
-
-\emcomment{Talk about Clojure errors}
+	\hfcomment{Elena}
 
 	\subsection{Goals}\label{sec:goals}
 This work is a part of a larger project on making Clojure more accessible to beginners. In particular, we have developed an alternative system of error messages that do not use Java datatypes and other terminology that beginner programmers would not be familiar with. 
@@ -334,103 +327,99 @@ From these we can begin to gauge the significance of the error messages in their
 \section{Examples}\label{sec:examples}
 	\hfcomment{Sean, Thomas}
 	
-	This first example is categorized as a medium problem. 	
+	This first example is categorized as a medium problem. 
+	It is at this difficulty because of the use of a higher order function.
+	The error in this example can be fixed by replacing \texttt{(even \%1)} with \texttt{(even \%2)} 
+	We want to see if the error message can help the subject to recognize that we should be testing the parity of the element we are adding to the list, and not the parity of the list itself, because that would not make sense. 
 	
 	Problem statement:
 		Make the following function work so that all the test cases below evaluate to true.
 	
 	Clojure code:
-	\begin{verbatim}
-		(defn filter-even [lis] (reduce #(if (even %1) (cons %2 %1) %2) '() lis))
-	\end{verbatim}
-
+\begin{verbatim}
+		(defn filter-even [lis] 
+			(reduce #(if (even %1) (cons %2 %1) %2) '() lis))
+\end{verbatim}
 	Racket code:
-	\begin{verbatim}
-		(define (filter-even lis) (foldl (lambda (x y) (if (even? y) (cons x y) y)) '() lis))
-	\end{verbatim}
-
-	In this case, both have identical test cases: 
-	\begin{verbatim}
+\begin{verbatim}
+		(define (filter-even lis) 
+			(foldl (lambda (x y) (if (even? y) (cons x y) y)) '() lis))
+\end{verbatim}
+	In this case, Racket and Clojure have identical test cases: 
+\end{verbatim}
+\begin{verbatim}
 		(= '(2 4 6 8) (filter-even '(1 2 3 4 5 6 7 8 9)))
 		(= '() (filter-even '(1 3 5 7 9)))
-	\end{verbatim}
+\end{verbatim}
 
 	Our error:
-	\begin{verbatim}
-		Error: In function even?, the first argument () must be an integer number but is a list.
-	\end{verbatim}
+\begin{verbatim}
+		Error: In function even?, the first argument () must be an integer number 
+		but is a list.
+\end{verbatim}
 
 	Standard Clojure error:
-	\begin{verbatim}
-		CompilerException java.lang.RuntimeException: Unable to resolve symbol: even in this context, 	compiling:(/tmp/form-init1838929281200029831.clj:1:38) 
-	\end{verbatim}
+\begin{verbatim}
+		CompilerException java.lang.RuntimeException: Unable to resolve symbol: 
+		even in this context, 	compiling:(/tmp/form-init1838929281200029831.clj:1:38) 
+\end{verbatim}
 
 	Racket error:
-	\begin{verbatim}
+\begin{verbatim}
 		even?: expects integer, given '()
-	\end{verbatim}
+\end{verbatim}
 
 
 	We have categorized this second example is an easy problem.
+	The error in this example can be fixed by replacing the function \texttt{first} with \texttt{rest}.
+	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
+	We hope our error message will help the subject to realize that they should be dealing with a sequence, not an element of a sequence. 
+	
+	
+	
 
 	Problem statement:
 		Make the following function work so that all the test cases below evaluate to true. 
 		
-	The error in this example can be fixed by replacing the function `first` with `rest`.
-	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
 		
 	Clojure code:
-	\begin{verbatim}
+\begin{verbatim}
 		(defn my-length [lst]
  			(if (empty? lst) 0 (+ 1 (my-length (first lst)))))
-	\end{verbatim}
-		
+\end{verbatim}
 	Racket code:
-	\begin{verbatim}
+\begin{verbatim}
 		(define (my-length lst)
   			(cond
  				[(empty? lst) 0]
    				[else (+ 1 (my-length (first lst)))]))
-	\end{verbatim}
-		
+\end{verbatim}
 	Clojure test cases:
-	\begin{verbatim}
+\begin{verbatim}
 		(= (my-length '(5 4 3 2 1)) 5)
 		(= (my-length '()) 0)
 		(= (my-length '(1 3 5 7 9 11)) 6)
-	\end{verbatim}
-	
+\end{verbatim}
 	Racket test cases:
-	\begin{verbatim}
+\begin{verbatim}
 		(equal? (my-length '(5 4 3 2 1)) 5)
 		(equal? (my-length '()) 0)
 		(equal? (my-length '(1 3 5 7 9 11)) 6)
-	\end{verbatim}
-	
+\end{verbatim}
 	Our error:
-	\begin{verbatim}
+\begin{verbatim}
 		Error: Don't know how to create a sequence from a number.
-		Found in file may2015.clj on line 12 at character 1.
-        clojure.core/seq (core.clj line 135)
-        clojure.core/empty? (core.clj line 5944)
-        intro.may2015/my-length (may2015.clj line 10)
-        intro.may2015/my-length (may2015.clj line 10)
-        intro.may2015/eval8694 (may2015.clj line 12)
-        intro.core/-main (core.clj line 114)
-			\end{verbatim}
-
+\end{verbatim}
 	Standard Clojure error:
-	\begin{verbatim}
+\begin{verbatim}
 		IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:528)
-	\end{verbatim}
 
-
+\end{verbatim}
 	Racket error:
-	\begin{verbatim}
+\begin{verbatim}
 		first: expects a non-empty list; given: 1
-	\end{verbatim}
-
-
+		
+\end{verbatim}
 
 
 \section{Conclusion}\label{sec:conclusion}
