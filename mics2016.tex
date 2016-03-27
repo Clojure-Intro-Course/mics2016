@@ -201,7 +201,7 @@ Teaching these concepts in introductory courses creates a foundation that later 
 \emcomment{We use hashmaps; need to mention those}
 	\subsection{Differences between Racket and Clojure}\label{sec:diff}
 	
-Racket \hfcomment{Beginning student language?} and Clojure, while still lisps, satisfy different design goals. 
+Racket \hfcomment{Beginning student language?} and Clojure, while both still lisps, satisfy different design goals. 
 Racket is designed for introductory students, while Clojure focuses on concurrency and integration with the Java virtual machine. 
 The differing purposes of these language have created divides in the syntax and idioms of Racket and Clojure.
  The differences begin at definition of variables; Clojure defines functions with the following syntax
@@ -225,7 +225,7 @@ Hashmaps in Clojure are a collection of key-value pairs:
 	{key value, key value, key value}
 \end{verbatim}
 
-Hashmaps commonly use keywords. Keywords are simple names that have a colon in front.
+Hashmaps commonly use keywords. Keywords are names that have a colon in front.
 An example of a hashmap using keywords follows: 
 
 \begin{verbatim}
@@ -253,11 +253,24 @@ Structs automatically generate an accessor function for each field in the struct
 	(position-x (position 75 42))
 	-> 75
 \end{verbatim}
+
+Both Racket and Clojure have \texttt{let}, which provides local bindings within the scope of let. Clojure's \texttt{let} has the following syntax:
+\begin{verbatim}
+	(let [x 1 y 2]
+	  (+ x y))
+	-> 3
+\end{verbatim}
+Racket's syntax is similar, but each pair of symbols and expressions is placed in brackets.
+\begin{verbatim}
+	(let ([x 1] [y 2])
+	  (+x y))
+\end{verbatim}
 \section{Usability Study}\label{sec:study}
 	\subsection{Objectives}\label{sec:obj}
 	\hfcomment{Elena}
 	\subsection{Experimental Setup}\label{sec:setup}
-
+properly because of the limitations of the Java virtual machine.
+	   
 The study is split into two main parts: Racket review and testing, and a brief overview of Clojure and testing.
 The goal of each section is to introduce the two languages' basic functionality and then test the participants ability to correct mistakes in that language.
  Testing is followed by a brief ``interview'' at the end. 
@@ -338,13 +351,14 @@ From these we can begin to gauge the significance of the error messages in their
 	\hfcomment{Elena}
 	\subsection{Question parallelism}\label{sec:parallel}
 	\hfcomment{Henry}
-	both features - don't use vectors, cond, no loop recur in clojure
-	One of the overarching themes of this study was the difficulty in creating questions that had similar meaning, errors, and syntax in both Clojure and Racket.
-	 Often, our questions are somewhat less than idiomatic because of the constraints imposed by the short time commitment we intended for the study.
-	  For instance, we only use lists in our questions, where idiomatic Clojure prefers vectors, which combine the best features of arrays and lists.
-	   Reducing the amount of review and potential sources of confusion was paramount. 
-	   For instance, Clojure doesn't support tail recursion properly because of the limitations of the Java virtual machine.
-	    In order to create tail-recursive structures, idiomatic Clojure uses a construct called loop recur to bypass this limitation. \hfcomment{Cond?}
+	
+	One of the overarching themes of this study was the difficulty in creating questions that had similar meaning, errors, and syntax in both Clojure and Racket. 
+	Often, our questions are somewhat less than idiomatic because of the constraints imposed by the short time commitment we intended for the study.
+	For instance, we only use lists in our questions, where idiomatic Clojure prefers vectors, which combine the best features of arrays and lists.
+	 Reducing the amount of review and potential sources of confusion was paramount; For instance, Clojure doesn't support tail recursion properly because of the limitations of the Java virtual machine.
+	 In order to create tail-recursive structures, idiomatic Clojure uses a construct called loop recur to bypass this limitation.
+	 Loop recur has complex syntax and semantics, and so our questions avoid the use of Loop recur, despite the fact that it is idiomatic. 
+	 The gap between idiomatic code and testable code is wide, but avoiding complex features is a good start. \hfcomment{Cond?}
 \section{Examples}\label{sec:examples}
 	\hfcomment{Sean, Thomas}
 	
