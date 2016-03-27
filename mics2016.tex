@@ -277,24 +277,29 @@ Below is the outline of a participant's experience:
 
 \subsubsection{Languages overview}\label{subsec:overview}
 
-The overall purpose of each instructional session is to both ensure that the participants have enough fundamental knowledge of the language presented to them to have a basic understanding of the problems. 
+The overall purpose of each instructional session is to ensure that the participants have enough fundamental knowledge of the language presented to them to have a basic understanding of the problems. 
 In addition, the session should also ensure a relatively similar level of familiarity with both Clojure and Racket among all participants. 
 Each participant in the study will go through the process of reviewing and testing individually in order to minimize outside influence from other participants or distractions. 
 Because of this, the participant's experiences must be parallel with each other both in terms of the environment and the materials provided such as not to create bias.
+
 The Racket review section will be a reintroduction to participants, as they should already have a base knowledge of Racket from previous courses taken.
 The participants should have little or no knowledge of Clojure when coming into the study, so the Clojure lesson will focus more on drawing similarities from Racket and basic function explanations.
-The core topics to cover for each language are syntax such as prefix notation, higher order functions, function definition, and recursion.
+The core topics to cover for each language are syntax (such as the prefix notation), higher order functions, function definitions, and recursion.
+This part will consist of a brief writeup with examples. The Clojure writeup will assume familiarity with Racket and will highlight the differences. 
 
 \subsubsection{Testing}\label{subsec:testing}
 
-After the education part the participants will be assigned to a computer where their actions will be monitored by a reviewer. 
+After the overview the participants will be assigned to a computer where their actions will be monitored by a reviewer. 
 From here, they will be directed to connect to a website we have constructed that will present them with a series of problems to solve. 
-Participants will not be allowed to consult outside sources, the reviewer, or other participants during this period of the study except for the language's public API. 
-The participants will also have access to either Racket's built-in IDE or a Clojure project in LightTable depending on which language they are being tested on.
-The website they connect to pulls its questions from a set of parallel questions between Clojure and Racket we have constructed, so that for every question in Racket there is an computationally equal question in Clojure and vice-versa.
-Each question pair has a difficulty rating associated with it, with one being the easiest questions and 5 being the hardest questions.
+Participants will not be allowed to consult outside sources, the reviewer, or other participants during this period of the study except for the language's public API. \emcomment{clojuredocs  aren't exactly a public API, would this be allowed?} 
+The participants will also have access to Racket's built-in IDE for Racket questions and to a project in the LightTable code editor for the Clojure questions. 
+
+The website they connect to pulls its questions from a set of parallel questions between Clojure and Racket we have constructed, so that for every question in Racket there is an equivalent question in Clojure and vice-versa.
+Each question pair has a difficulty rating associated with it, with 1 being the easiest questions and 5 being the hardest questions.
 When a new participant logs into the website, it constructs both the Racket and Clojure tests to present by randomly selecting question-pairs from the pool. 
-The program must choose set amounts of questions from each difficulty, such as three level one questions, one level two question, 2 level three questions, ect, every time it creates tests. 
+The program must choose set amounts of questions from each difficulty, such as three level-1 questions, one level-2 question, two level-3 questions, etc., every time it creates tests. 
+
+\emcomment{The part that follows should really be condensed a lot}
 As an example of this, assume a student sits down and logs into the website to take a test.
 The website goes to construct the test under the restriction that every set of test questions it creates, no matter what language, must have three level one questions from that language. 
 It checks the pool of level one questions and sees there are seven possible level one question-pairs for the program to use.
@@ -303,14 +308,15 @@ We can think about the pool like this,
 LEVEL 1: (C1,R1), (C2,R2), (C3,R3),...,(C7,R7)
 
 where a question pair is C1 (Clojure question 1) and R1 (Racket question 1), which are essentially the same question in different languages. 
+\emcomment{Perhaps labeling them with the level? C1-2 for Clojure level 1, q. 2?}
 
 The website then randomly selects three level one question-pairs from the seven, removes them from the pool, and adds the Racket version of those questions to the set of Racket questions for the test.
 The website constructs the rest of the Racket test in a similar fashion for each difficulty level by randomly selecting question-pairs, adding the Racket version to the  Racket test, and removing the pair from the pool.
 Even though we are only using the Racket version of the question in the Racket test, we still remove the whole pair from the pool so that we don't end up duplicating questions.
-If we did not remove the pair, our participant could end up with question R1 in their Racket test and C1 in their Clojure test, effectively giving them the same questions twice.
+If we did not remove the pair, our participant could end up with question R1 in their Racket test and C1 in their Clojure test, effectively giving them the same questions twice. \emcomment{The previous two sentences should be combined} 
 After the Racket test is made, the website goes to create the Clojure test and moves to add three new level one questions to it.
 Since we have already taken out three question-pairs from the pool of seven, there are only four level one question-pairs left to use.
-The website randomly select three questions out of the remaining four that have not been used and puts them into the Clojure Test.
+The website randomly select three questions out of the remaining four that have not been used and puts them into the Clojure Test. \emcomment{No, all of the remaining questions will be used in the test in Racket}
 In the end our tests for this participant may end up looking something like this; 
 
 Racket Test: R1, R6, R3
@@ -320,7 +326,7 @@ Clojure Test: C2, C5, C7
 
 	The participants will be allocated a time limit to answer the questions on each test. 
 They are allowed to try as many times as needed on each questions and they are allowed to skip past questions with the possibility of coming back to them later on. 
-Before taking their Clojure test each participant will secretly be assigned to receive either Clojure's default error messages or our custom Clojure error messages.
+Before taking their Clojure test each participant will  be assigned to receive either Clojure's default error messages or our custom Clojure error messages.
 While testing, the computer will take a screenshot periodically and the reviewer will take notes on what the participant does while solving the problems.
 After the finishing all of the questions, the participant will be asked a series of questions related to the tests such as, "What part of the tasks were easy for you? What parts were hard?".
 After the question period of the study, we will now have a collection of screen captures from each participant detailing the process solving the problems, notes on their problem solving process, and participant opinion on the challenges of the study.
