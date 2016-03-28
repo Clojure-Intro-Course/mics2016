@@ -173,9 +173,10 @@ Detailed description of the study is given in Section~\ref{sec:setup}.
 
 A statistically significant higher number of fixed code fragments and a lower number of attempts for our error messages system, compared to the native Clojure system, would indicate that our error messages are easier for students to understand. Additionally we are measuring the difference between either one of the Clojure error messages systems and the Racket messages. Racket error messages were specifically developed to be helpful for beginners. Thus, a comparison to Racket messages would indicate how our error messages compare to the expectations of error messages for beginner-friendly functional languages. 
 
-\emcomment{Just give an overview of the rest}
+Currently the study design is mostly completed, but the study itself has not been conducted yet. The paper describes the study design goals, as well as its setup and questions. 
 
-\emcomment{Need to mention the IRB exemption somewhere: one of the Racket papers does.}
+The rest of the paper is structured as follows: we give an overview of Lisps in general and Racket and Clojure in particular in Section~\ref{sec:lang}, explain the setup of the study in Section~\ref{sec:study}, focus on questions selection in Section~\ref{sec:select}, give examples of the questions in Section~\ref{sec:examples}, and present conclusions and discuss future work in Section~\ref{sec:conclusion}.
+
 
 %\hfcomment{This needs to describe error messages briefly. Reference previous project.}
 
@@ -284,9 +285,15 @@ Racket's syntax is similar, but each pair of symbols and expressions is placed i
 \end{verbatim}
 
 \section{Usability Study}\label{sec:study}
-	\subsection{Objectives}\label{sec:obj}
-	\hfcomment{Elena}
-	\emcomment{Mention who the participants are, how they are selected}
+	\subsection{Study participants}\label{sec:obj}
+The usability study that we have developed is structured around ``parallel questions'': erroneous fragments that are the same in 
+Racket and Clojure (except the syntactic differences), but result in different error messages.  
+The participants for the study are volunteer students from the U of M, Morris who have taken the introductory computer science course in Racket and have no, or very little, experience with Clojure.
+These students have reasonable knowledge of Racket and functional approaches to problem solving while still being beginners in terms of programming practice and experience.
+We expect to have about 20 participants. 
+Participants will be recruited via the CS department mailing list, as well as via email and short presentations in freshmen and sophomore level CS classes. 
+In order to attract a larger and more diverse student population for the study, students will be compensated for their time, thanks to a gift from Cognitect, Inc. 
+The study is exempt from full IRB review. 
 
 	\subsection{Experimental Setup}\label{sec:setup}
 	
@@ -294,8 +301,6 @@ Racket's syntax is similar, but each pair of symbols and expressions is placed i
 %properly because of the limitations of the Java virtual machine.
 	   
 The study is split into two main parts: Racket review and testing, and a brief overview of Clojure and testing.
-The participants for the study are volunteer students from the U of M, Morris who have taken the introductory computer science course in Racket.
-These students have reasonable knowledge of Racket and functional approaches to problem solving while still being beginners in terms of programming practice and experience.
 The goal of each section is to introduce the two languages' basic functionality and then test the participants ability to correct mistakes in that language.
  Testing is followed by a brief ``interview'' at the end. 
 
@@ -376,10 +381,11 @@ Lack of such correlation would mean that participants' perception is unreliable 
 
 \section{Principles of Question Selection}\label{sec:select}
 	\hfcomment{Henry + Elena}
+
 	\subsection{Selecting Meaningful Accessible Questions}\label{sec:meaning}
 	\hfcomment{Elena}
+
 	\subsection{Question parallelism}\label{sec:parallel}
-	\hfcomment{Henry}
 	
 	One of the overarching themes of this study was the difficulty in creating questions that had similar meaning, errors, and syntax in both Clojure and Racket. 
 	Often, our questions are somewhat less than idiomatic because of the constraints imposed by the short time commitment we intended for the study.
@@ -496,6 +502,9 @@ Lack of such correlation would mean that participants' perception is unreliable 
 
 \section{Conclusion}\label{sec:conclusion}
 	\hfcomment{Elena}
+
+\section{Acknowledgments}
+Thanks to UMN UROP, UMM MAP, and UMM LSAMP for providing support for students research, and to Cognitect, Inc. for providing funding to compensate study participants. 
 
 \bibliographystyle{acm}
 \bibliography{mics2016}
