@@ -64,9 +64,9 @@
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
 \definecolor{Teal}{RGB}{2,132,130}
 %Uncomment this if you want to show work-in-progress comments
-\newcommand{\comment}[1]{{\bf \tt  {#1}}}
+%\newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
-%\newcommand{\comment}[1]{}
+\newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
 \newcommand{\hfcomment}[1]{\textcolor{Teal}{\comment{Henry: {#1}}}}
@@ -118,12 +118,10 @@ Error messages are the only form of response that programmers get from malfuncti
 
 The languages we will be comparing are a subset of Racket called beginning student language, and Clojure. Beginning student language is a language designed for introductory students using the “How to Design Programs 2” curriculum, with error messages that are designed for novices. Clojure is a Lisp built on top of the Java programming language which better supports concurrent and parallel programming and has been rapidly gaining popularity in industry. However, Clojure was not developed with beginner programmers in mind: its native error messages are often just Java error messages that don’t make sense to programmers without Java background. Our previous work with Clojure has built an alternative error messages system that we think may be more useful to beginner CS students. 
 
-Our work is a part of the ClojurEd project which aims to use Clojure to teach an introductory CS course. One of the project goals is to provide introductory students with understandable error messages. We attempt to achieve this goal by rephrasing Java errors in terms that are familiar to new Clojure programmers. As a simple example, we replace references to specific Java numeric types, such as “int” and “double”, with just the term “number”. The next stage of the project is to evaluate how well the new messages work for beginner programmers. 
-
-In order to evaluate how helpful our error messages are to beginners, we have designed a usability study comparing the proposed and standard Clojure error messages to each other and to Racket error messages. There are very few published usability studies of error messages and very few guidelines for evaluating quality of error messages, thus we have developed methodology for comparing error messages in two similar languages. We evaluate the effectiveness of our error messages by giving students, who are familiar with Racket, erroneous code in both Racket and Clojure. We will then observe how the information presented within the error messages helps them to correct the erroneous code. Effectiveness of error messages will primarily be measured by the number of code samples successfully corrected by students, as well as the number of attempts is takes a student to correct the errors. 
-
+Our work is a part of the ClojurEd project which aims to use Clojure to teach an introductory CS course. One of the project goals is to provide introductory students with understandable error messages. The current stage of the project is to evaluate how well the new messages work for beginner programmers. 
+We have designed a usability study comparing the proposed and standard Clojure error messages to each other and to Racket error messages. 
 In this paper we present the details of the study and the approaches to developing code samples that allow us to compare error messages systems. We also present and discuss preliminary results of the usability study. 
-\emcomment{This would need to be modified after we've finished the paper}
+%\emcomment{This would need to be modified after we've finished the paper}
 \newpage
 \setcounter{page}{1}
 
@@ -284,6 +282,8 @@ Racket's syntax is similar, but each pair of symbols and expressions is placed i
 	  (+ x y))
 \end{verbatim}
 
+Another important syntactic difference is that Racket uses the keyword \texttt{Lambda} for defining anonymous functions, whereas Clojure uses \texttt{fn}. 
+
 \section{Usability Study}\label{sec:study}
 	\subsection{Study participants}\label{sec:obj}
 The usability study that we have developed is structured around ``parallel questions'': erroneous fragments that are the same in 
@@ -380,12 +380,20 @@ The questions at the end would allow us to gauge how the messages are perceived,
 Lack of such correlation would mean that participants' perception is unreliable and should not be used for future evaluation.  
 
 \section{Principles of Question Selection}\label{sec:select}
-	\hfcomment{Henry + Elena}
+	Selecting questions for the study was a challenging process since every question must make sense in both Racket and Clojure and not require an involved introduction. Below we detail our approach to question selection.
 
 	\subsection{Selecting Meaningful Accessible Questions}\label{sec:meaning}
-	\hfcomment{Elena}
+	When putting together questions for the study, we followed the following principles:
+	\begin{itemize}
+	\item The code examples should be simple enough to understand the programmer's intent with just a few test examples. 
+	\item The code examples must have mistakes that a beginner programmer would make. Examples include switched arguments of a function or a mistyped identifier. 
+	\item There must be a simple fix for an error. This is challenging since some errors, such as s type mismatch, can be caused by a variety of issues, and a beginner
+	programmer can easily start making changes that are more complicated than they need to be, in an attempt to match the types. 
+	\item Code examples and tests must use the same simple set of features in Racket and in Clojure. For instance, Racket uses a function \texttt{check-expect} for testing. Clojure also has a similar library (expectations), but it is more convoluted. Thus in order to equalize the experience in the two languages we chose to use only = and \texttt{equals?} function for testing since they are the same in the two languages. 
+	\end{itemize}
 
-	\subsection{Question parallelism}\label{sec:parallel}
+
+	\subsection{Question Parallelism}\label{sec:parallel}
 	
 	One of the overarching themes of this study was the difficulty in creating questions that had similar meaning, errors, and syntax in both Clojure and Racket. 
 	Often, our questions are somewhat less than idiomatic because of the constraints imposed by the short time commitment we intended for the study.
@@ -393,7 +401,7 @@ Lack of such correlation would mean that participants' perception is unreliable 
 	 Reducing the amount of review and potential sources of confusion was paramount; For instance, Clojure doesn't support tail recursion properly because of the limitations of the Java virtual machine.
 	 In order to create tail-recursive structures, idiomatic Clojure uses a construct called loop recur to bypass this limitation.
 	 Loop recur has complex syntax and semantics, and so our questions avoid the use of Loop recur, despite the fact that it is idiomatic. 
-	 The gap between idiomatic code and testable code is wide, but avoiding complex features is a good start. \hfcomment{Cond?}
+	 The gap between idiomatic code and testable code is wide, but avoiding complex features is a good start. %\hfcomment{Cond?}
 \section{Examples}\label{sec:examples}
 %	\hfcomment{Sean, Thomas}
 In this section we provide two examples of questions in the study. 
@@ -407,7 +415,7 @@ In this section we provide two examples of questions in the study.
 and in Clojure as 
 \begin{verbatim}
 		(defn filter-even [elements] 
-		  (reduce #(if (even? %1) (cons %2 %1) %2) '() elements))
+		  (reduce (fn [x y] (if (even? x) (cons y x) y))  '() elements))
 \end{verbatim}
 	In this case, Racket and Clojure have identical test cases: 
 \begin{verbatim}
@@ -417,7 +425,8 @@ and in Clojure as
 
 	It is at this difficulty because of the use of a higher order function.
 We would like to see if the error message can help the subject to recognize that we should be testing the parity of the element we are adding to the list, and not the parity of the list itself.
-	The error in this example is can be fixed by replacing \texttt{(even? y)} with   \texttt{(even? x)} in Racket and \texttt{(even \%1)} with \texttt{(even \%2)} in Clojure. 
+	The error in this example is can be fixed by replacing \texttt{(even? y)} with   \texttt{(even? x)} in Racket and \texttt{(even? x)} with \texttt{(even? y)} in Clojure. 
+	Note that Racket \texttt{foldl} and Clojure \texttt{reduce} take their arguments in the opposite order. However,  the test subjects will not see these two examples together (they will get either a Racket version or a Clojure version), and thus would not be confused because of inconsistency. 
 	
 	The unmodified Clojure error in this case is:
 \begin{verbatim}
@@ -489,8 +498,15 @@ a sequence but is a number.
 	Racket also communicates that information, but with fewer words. 
 
 
-\section{Conclusion}\label{sec:conclusion}
-	\hfcomment{Elena}
+\section{Conclusion and Future Work}\label{sec:conclusion}
+At this stage of our work we have developed the study setup, the principles for question selection, and developed questions for the study, as well as interview questions for participants. 
+We also have narrowed down the set of features of the two languages that our study uses.
+As far as we know, this is the only comparative study of error messages usability between two different languages, and we have encountered (and overcome) challenges in making the questions simple, clear, and parallel in the two languages. 
+We are still working on putting together the overview of the two languages, now that we have narrowed down what these overviews include. 
+
+The major task that remains to be done is conducting the study itself and processing its results. We hope to have it completed by the end of April 2016. 
+
+The completion of the study will point out strengths and weaknesses of our error message system, which would direct our future research. 
 
 \section{Acknowledgments}
 Thanks to UMN UROP, UMM MAP, and UMM LSAMP for providing support for students research, and to Cognitect, Inc. for providing funding to compensate study participants. 
