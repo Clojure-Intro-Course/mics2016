@@ -281,7 +281,7 @@ Both Racket and Clojure have \texttt{let}, which provides local bindings within 
 Racket's syntax is similar, but each pair of symbols and expressions is placed in brackets.
 \begin{verbatim}
 	(let ([x 1] [y 2])
-	  (+x y))
+	  (+ x y))
 \end{verbatim}
 
 \section{Usability Study}\label{sec:study}
@@ -367,7 +367,7 @@ They are allowed to try as many times as needed on each questions and they are a
 Before taking their Clojure test each participant will  be assigned to receive either Clojure's default error messages or our custom Clojure error messages.
 While testing, the computer will take a screenshot periodically, and the reviewer will take notes on what the participant does while solving the problems.
 The purpose of doing both is so that later on we know what to look for in screenshots. Screenshots in which there are no changes will be discarded. 
-Each session will result in a series of screenshots and a short ``script'' of the participant's actions, e.g. ``1:12 ran the program, got a message \texttt{Cannot convert 2 to a function}, 1:45 switched the order of the function parameters'', etc.
+Each session will result in a series of screenshots and a short ``script'' of the participant's actions with timestamps in minutes and seconds since the beginning of the test, e.g. ``At 1:12 ran the program, got a message \texttt{Cannot convert 2 to a function}, at 1:45 switched the order of the function parameters'', etc.
 After the finishing all of the questions, the participant will be asked a series of questions related to the tests such as, "What part of the tasks were easy for you? What parts were hard?".
 
 \subsubsection{Data evaluation}\label{subsec:evaluation}
@@ -395,109 +395,98 @@ Lack of such correlation would mean that participants' perception is unreliable 
 	 Loop recur has complex syntax and semantics, and so our questions avoid the use of Loop recur, despite the fact that it is idiomatic. 
 	 The gap between idiomatic code and testable code is wide, but avoiding complex features is a good start. \hfcomment{Cond?}
 \section{Examples}\label{sec:examples}
-	\hfcomment{Sean, Thomas}
+%	\hfcomment{Sean, Thomas}
+In this section we provide two examples of questions in the study. 
 	
-	This first example is categorized as a medium problem. 
-	It is at this difficulty because of the use of a higher order function.
-	The error in this example can be fixed by replacing \texttt{(even \%1)} with \texttt{(even \%2)} 
-	We want to see if the error message can help the subject to recognize that we should be testing the parity of the element we are adding to the list, and not the parity of the list itself, because that would not make sense. 
-	
-	Problem statement:
-		Make the following function work so that all the test cases below evaluate to true.
-	
-	Clojure code:
+	This first example is categorized as a medium level of difficulty. It asks the participant to make the function work so that all the test cases below evaluate to true.
+	The function is given in Racket as 
 \begin{verbatim}
-		(defn filter-even [lis] 
-			(reduce #(if (even %1) (cons %2 %1) %2) '() lis))
+		(define (filter-even elements) 
+		  (foldl (lambda (x y) (if (even? y) (cons x y) y)) '() elements))
 \end{verbatim}
-	Racket code:
+and in Clojure as 
 \begin{verbatim}
-		(define (filter-even lis) 
-			(foldl (lambda (x y) (if (even? y) (cons x y) y)) '() lis))
+		(defn filter-even [elements] 
+		  (reduce #(if (even? %1) (cons %2 %1) %2) '() elements))
 \end{verbatim}
 	In this case, Racket and Clojure have identical test cases: 
-
 \begin{verbatim}
 		(= '(2 4 6 8) (filter-even '(1 2 3 4 5 6 7 8 9)))
 		(= '() (filter-even '(1 3 5 7 9)))
 \end{verbatim}
 
-	Our error:
+	It is at this difficulty because of the use of a higher order function.
+We would like to see if the error message can help the subject to recognize that we should be testing the parity of the element we are adding to the list, and not the parity of the list itself.
+	The error in this example is can be fixed by replacing \texttt{(even? y)} with   \texttt{(even? x)} in Racket and \texttt{(even \%1)} with \texttt{(even \%2)} in Clojure. 
+	
+	The unmodified Clojure error in this case is:
 \begin{verbatim}
-		Error: In function even?, the first argument () must be an integer number 
-		but is a list.
+java.lang.IllegalArgumentException: Argument must be an integer: 
+clojure.lang.PersistentList$EmptyList@1
+               core.clj:1355 clojure.core/even?	
 \end{verbatim}
 
-	Standard Clojure error:
+	Our error is:
 \begin{verbatim}
-		CompilerException java.lang.RuntimeException: Unable to resolve symbol: 
-		even in this context, 	compiling:(/tmp/form-init1838929281200029831.clj:1:38) 
+		Error: In function even?, the first argument () must be an integer 
+		number but is a list.
 \end{verbatim}
+
+
 
 	Racket error:
 \begin{verbatim}
 		even?: expects integer, given '()
 \end{verbatim}
 
-	We have chosen careful wording to communicate that the \texttt{even?} requires an integer as it's first argument, but was given a list. 
+	We have chosen careful wording to communicate that the \texttt{even?} requires an integer as its first argument, but was given a list. 
 	Our error message is clearly an improvement on standard Clojure, since we have told the user the type expected. 
-	Ours gives more detailed information than the Racket example, since it also tells you the type of the wrong argument it received.
+	It also gives more detailed information than the Racket example, since it tells the user the type of the wrong argument it received.
 	
-	We have categorized this second example is an easy problem.
-	The error in this example can be fixed by replacing the function \texttt{first} with \texttt{rest}. 
-	The error is caused because first requires a sequence as its first argument. 
-	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
-	We hope our error message will help the subject to realize that they should be dealing with a sequence, not an element of a sequence. 
-	
-	
-	
+	We have categorized the following second example is an easy problem: 
 
-	Problem statement:
-		Make the following function work so that all the test cases below evaluate to true. 
-		
-		
-	Clojure code:
-\begin{verbatim}
-		(defn my-length [lst]
- 			(if (empty? lst) 0 (+ 1 (my-length (first lst)))))
-\end{verbatim}
 	Racket code:
 \begin{verbatim}
-		(define (my-length lst)
+		(define (my-length elements)
   			(cond
- 				[(empty? lst) 0]
-   				[else (+ 1 (my-length (first lst)))]))
+ 			 [(empty? elements) 0]
+			 	 [else (+ 1 (my-length (first elements)))]))
 \end{verbatim}
-	Clojure test cases:
+	Clojure code:
+\begin{verbatim}
+		(defn my-length [elements]
+ 			(if (empty? elements) 0 (+ 1 (my-length (first elements)))))
+\end{verbatim}
+	The test cases are:
 \begin{verbatim}
 		(= (my-length '(5 4 3 2 1)) 5)
 		(= (my-length '()) 0)
 		(= (my-length '(1 3 5 7 9 11)) 6)
 \end{verbatim}
-	Racket test cases:
+	The error is caused because first requires a sequence as its first argument. 
+	The error in this example can be fixed by replacing the function \texttt{first} with \texttt{rest}. 
+	The Clojure code in this example is done in a non-ideomatic way so that it is more comparable to the Racket code.
+	We hope our error message will help the subject to realize that they should be dealing with a sequence, not an element of a sequence. 
+
+	The standard Clojure error:
 \begin{verbatim}
-		(equal? (my-length '(5 4 3 2 1)) 5)
-		(equal? (my-length '()) 0)
-		(equal? (my-length '(1 3 5 7 9 11)) 6)
-\end{verbatim}
+		IllegalArgumentException Don't know how to create ISeq from: 
+java.lang.Long  clojure.lang.RT.seqFrom (RT.java:528)
+\end{verbatim}		
+
 	Our error:
 \begin{verbatim}
-		Error: In function first, the first argument 5 must be a sequence but is a number.
+		Error: In function first, the first argument 5 must be 
+a sequence but is a number.
 \end{verbatim}
-	Standard Clojure error:
-\begin{verbatim}
-		IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:528)
 
-\end{verbatim}
 	Racket error:
 \begin{verbatim}
-		first: expects a non-empty list; given: 1
-		
+		first: expects a non-empty list; given: 1	
 \end{verbatim}
 	An introductory level student would not be able to parse much, if any useful information out of the original Clojure error in this case. 
-	Java should not be mentioned in a Clojure error. 
 	Our error clearly communicates that the first argument of first must be a sequence but is a number.
-	Racket also communicates that information, but with less words. 
+	Racket also communicates that information, but with fewer words. 
 
 
 \section{Conclusion}\label{sec:conclusion}
