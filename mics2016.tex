@@ -403,9 +403,13 @@ From these we can begin to gauge the significance of the error messages in their
 		even?: expects integer, given '()
 \end{verbatim}
 
-
+	We have chosen careful wording to communicate that the \texttt{even?} requires an integer as it's first argument, but was given a list. 
+	Our error message is clearly an improvement on standard Clojure, since we have told the user the type expected. 
+	Ours gives more detailed information than the Racket example, since it also tells you the type of the wrong argument it received.
+	
 	We have categorized this second example is an easy problem.
-	The error in this example can be fixed by replacing the function \texttt{first} with \texttt{rest}.
+	The error in this example can be fixed by replacing the function \texttt{first} with \texttt{rest}. 
+	The error is caused because first requires a sequence as its first argument. 
 	The Clojure code in this example is done in a non-ideamatic way so that it is more comparable to the Racket code.
 	We hope our error message will help the subject to realize that they should be dealing with a sequence, not an element of a sequence. 
 	
@@ -442,7 +446,7 @@ From these we can begin to gauge the significance of the error messages in their
 \end{verbatim}
 	Our error:
 \begin{verbatim}
-		Error: Don't know how to create a sequence from a number.
+		Error: In function first, the first argument 5 must be a sequence but is a number.
 \end{verbatim}
 	Standard Clojure error:
 \begin{verbatim}
@@ -454,6 +458,10 @@ From these we can begin to gauge the significance of the error messages in their
 		first: expects a non-empty list; given: 1
 		
 \end{verbatim}
+	An introductory level student would not be able to parse much, if any useful information out of the original Clojure error in this case. 
+	Java should not be mentioned in a Clojure error. 
+	Our error clearly communicates that the first argument of first must be a sequence but is a number.
+	Racket also communicates that information, but with less words. 
 
 
 \section{Conclusion}\label{sec:conclusion}
