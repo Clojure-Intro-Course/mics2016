@@ -271,6 +271,8 @@ Racket's syntax is similar, but each pair of symbols and expressions is placed i
 	\subsection{Objectives}\label{sec:obj}
 	\hfcomment{Elena}
 	\subsection{Experimental Setup}\label{sec:setup}
+	
+\thcomment{I did not put the following line here, is someone missing this?}
 properly because of the limitations of the Java virtual machine.
 	   
 The study is split into two main parts: Racket review and testing, and a brief overview of Clojure and testing.
@@ -306,7 +308,7 @@ This part will consist of a brief writeup with examples. The Clojure writeup wil
 
 After the overview the participants will be assigned to a computer where their actions will be monitored by a reviewer. 
 From here, they will be directed to connect to a website we have constructed that will present them with a series of problems to solve. 
-Participants will not be allowed to consult outside sources, the reviewer, or other participants during this period of the study except for the language's public API. \emcomment{clojuredocs  aren't exactly a public API, would this be allowed?} 
+Participants will not be allowed to consult outside sources, the reviewer, or other participants during this period of the study except for the language's public API for Racket and Clojuredocs for Clojure.
 The participants will also have access to Racket's built-in IDE for Racket questions and to a project in the LightTable code editor for the Clojure questions. 
 
 The website they connect to pulls its questions from a set of parallel questions between Clojure and Racket we have constructed, so that for every question in Racket there is an equivalent question in Clojure and vice-versa.
@@ -314,29 +316,24 @@ Each question pair has a difficulty rating associated with it, with 1 being the 
 When a new participant logs into the website, it constructs both the Racket and Clojure tests to present by randomly selecting question-pairs from the pool. 
 The program must choose set amounts of questions from each difficulty, such as three level-1 questions, one level-2 question, two level-3 questions, etc., every time it creates tests. 
 
-\emcomment{The part that follows should really be condensed a lot}
 As an example of this, assume a student sits down and logs into the website to take a test.
-The website goes to construct the test under the restriction that every set of test questions it creates, no matter what language, must have three level one questions from that language. 
+The website goes to construct the test under the restriction that it should try to assign equal amounts of question from every level between each test, and it should use every question. 
 It checks the pool of level one questions and sees there are seven possible level one question-pairs for the program to use.
 We can think about the pool like this,
 
-LEVEL 1: (C1,R1), (C2,R2), (C3,R3),...,(C7,R7)
+LEVEL 1: (C1-1,R1-1), (C2-1,R2-1), (C3-1,R3-1),...,(C7-1,R7-1)
 
-where a question pair is C1 (Clojure question 1) and R1 (Racket question 1), which are essentially the same question in different languages. 
-\emcomment{Perhaps labeling them with the level? C1-2 for Clojure level 1, q. 2?}
+where a question pair is C1-1 (Clojure question 1, level 1) and R1-1 (Racket question 1, level 1), which are essentially the same question in different languages.
 
 The website then randomly selects three level one question-pairs from the seven, removes them from the pool, and adds the Racket version of those questions to the set of Racket questions for the test.
-The website constructs the rest of the Racket test in a similar fashion for each difficulty level by randomly selecting question-pairs, adding the Racket version to the  Racket test, and removing the pair from the pool.
-Even though we are only using the Racket version of the question in the Racket test, we still remove the whole pair from the pool so that we don't end up duplicating questions.
-If we did not remove the pair, our participant could end up with question R1 in their Racket test and C1 in their Clojure test, effectively giving them the same questions twice. \emcomment{The previous two sentences should be combined} 
-After the Racket test is made, the website goes to create the Clojure test and moves to add three new level one questions to it.
-Since we have already taken out three question-pairs from the pool of seven, there are only four level one question-pairs left to use.
-The website randomly select three questions out of the remaining four that have not been used and puts them into the Clojure Test. \emcomment{No, all of the remaining questions will be used in the test in Racket}
+The website constructs the rest of the Racket test in a similar fashion for each difficulty level by randomly selecting half of the question-pairs, adding the Racket version to the  Racket test, and removing the pair from the pool.
+Even though we are only using the Racket version of the question in the Racket test, we still remove the whole pair from the pool so that we don't end up with question R1-1 in their Racket test and C1-1 in their Clojure test, giving them the same questions twice. 
+After the Racket test is made, the website takes the rest of the questions in the pool and constructs the Clojure test from them.
 In the end our tests for this participant may end up looking something like this; 
 
-Racket Test: R1, R6, R3
+Racket Test: R1-1, R6-1, R3-1
 
-Clojure Test: C2, C5, C7
+Clojure Test: C2-1, C5-1, C7-1, C4-1
 
 
 	The participants will be allocated a time limit to answer the questions on each test. 
