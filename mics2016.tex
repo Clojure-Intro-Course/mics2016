@@ -267,15 +267,20 @@ Racket's syntax is similar, but each pair of symbols and expressions is placed i
 	(let ([x 1] [y 2])
 	  (+x y))
 \end{verbatim}
+
 \section{Usability Study}\label{sec:study}
 	\subsection{Objectives}\label{sec:obj}
 	\hfcomment{Elena}
+	\emcomment{Mention who the participants are, how they are selected}
+
 	\subsection{Experimental Setup}\label{sec:setup}
 	
-\thcomment{I did not put the following line here, is someone missing this?}
-properly because of the limitations of the Java virtual machine.
+%\thcomment{I did not put the following line here, is someone missing this?}
+%properly because of the limitations of the Java virtual machine.
 	   
 The study is split into two main parts: Racket review and testing, and a brief overview of Clojure and testing.
+The participants for the study are volunteer students from the U of M, Morris who have taken the introductory computer science course in Racket.
+These students have reasonable knowledge of Racket and functional approaches to problem solving while still being beginners in terms of programming practice and experience.
 The goal of each section is to introduce the two languages' basic functionality and then test the participants ability to correct mistakes in that language.
  Testing is followed by a brief ``interview'' at the end. 
 
@@ -336,13 +341,23 @@ Racket Test: R1-1, R6-1, R3-1
 Clojure Test: C2-1, C5-1, C7-1, C4-1
 
 
-	The participants will be allocated a time limit to answer the questions on each test. 
+	The participants will be allocated a time limit of 20 minutes to answer the questions in each language. 
 They are allowed to try as many times as needed on each questions and they are allowed to skip past questions with the possibility of coming back to them later on. 
+
 Before taking their Clojure test each participant will  be assigned to receive either Clojure's default error messages or our custom Clojure error messages.
-While testing, the computer will take a screenshot periodically and the reviewer will take notes on what the participant does while solving the problems.
+While testing, the computer will take a screenshot periodically, and the reviewer will take notes on what the participant does while solving the problems.
+The purpose of doing both is so that later on we know what to look for in screenshots. Screenshots in which there are no changes will be discarded. 
+Each session will result in a series of screenshots and a short ``script'' of the participant's actions, e.g. ``1:12 ran the program, got a message \texttt{Cannot convert 2 to a function}, 1:45 switched the order of the function parameters'', etc.
 After the finishing all of the questions, the participant will be asked a series of questions related to the tests such as, "What part of the tasks were easy for you? What parts were hard?".
+
+\subsubsection{Data evaluation}\label{subsec:evaluation}
+
 After the question period of the study, we will now have a collection of screen captures from each participant detailing the process solving the problems, notes on their problem solving process, and participant opinion on the challenges of the study.
 From these we can begin to gauge the significance of the error messages in their problem solving processes. 
+Numerical data (the number and the level of the solved problems, total time until correct solutions, the number of edits towards the right solution vs those leading away) will be processed statistically. 
+
+The questions at the end would allow us to gauge how the messages are perceived, and whether this correlates with their actual usefulness. A positive correlation would be useful to know for future research, allowing us to rely on participants' feedback. 
+Lack of such correlation would mean that participants' perception is unreliable and should not be used for future evaluation.  
 
 \section{Principles of Question Selection}\label{sec:select}
 	\hfcomment{Henry + Elena}
