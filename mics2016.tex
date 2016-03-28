@@ -132,44 +132,45 @@ Experienced programmers have the background to understand what error messages ac
 While interactions with errors in a programming language are an essential part of a programmer's experience, quite often error handling in a language is not very well thought through: error messages use inconsistent terminology, are ambiguous or misleading, and do not provide enough detail. 
 Beginner programmers find error messages unhelpful.
 Anecdotal evidence (informal questioning of about 10 CS students and almuni by the authors) indicates that novice programmers often do not even realize that an error message may contain useful information, except perhaps the line number; some ignore these messages entirely. 
-Consistently with the general programming languages community undervaluing of error messages quality, there is very little formal study of usability of error messages for beginners and very little methodology developed. The notable exception is the development and study of beginner-friendly error messages in the Racket programming language \cite{Marceau:2011,Marceau:2011-2}. 
+This observation is consistent with the general programming languages community undervaluing of error messages quality. There has been very little formal study of usability of error messages for beginners, and very little methodology developed for such studies. The notable exception is the development and study of beginner-friendly error messages in the Racket programming language \cite{Marceau:2011,Marceau:2011-2}. 
 
-Clojure is a functional language in the Lisp family released in 2007. 
-Clojure is translated to Java bytecode, employing the Java Virtual Machine (JVM) as its interpreter, and features Java interop: the ability to use Java code directly in Clojure code. 
-It quickly gained popularity, is widely used in industry and in open-source projects, and features a large community of developers with three major early conference (two in the U.S. and one in Europe), as well as numerous smaller gatherings and meetups. 
+Our work focuses on error messages for the Clojure programming language. Clojure is a functional language in the Lisp family released in 2007. 
+Clojure is compiled to Java bytecode, employing the Java Virtual Machine (JVM) as its interpreter. It features Java interop: the ability to use Java code directly in Clojure code. 
+It quickly gained popularity, is widely used in industry and in open-source projects, and features a large community of developers with three major annual conferences (two in the U.S. and one in Europe), as well as numerous smaller gatherings and meetups. 
 
-As a Lisp, Clojure has simple syntax and dynamic type system, and therefore may be a promising option in a functional-first approach to teaching programming \emcomment{add a citation here for FP first}. However, due to its implementation over Java, Clojure is notorious for its cryptic and unintuitive error messages. Clojure errors are just Java exceptions, and therefore are phrased in terms of Java types (e.g. \texttt{java.lang.Number}) and Java operations, such as typecasting. They also come with Java stack trace which can be particularly verbose in Clojure since functional languages tend to have a large number of function calls on the stack. Clojure error messages are often confusing even to experienced programmers, and are a barrier for beginners. 
+As a Lisp, Clojure has simple syntax and dynamic type system, and therefore may be a promising option in a functional-first approach to teaching programming, e.g.~\cite{thompson}. %\emcomment{add a citation here for FP first}. 
+However, due to its implementation over Java, Clojure is notorious for its cryptic and unintuitive error messages. Clojure errors are just Java exceptions, and therefore are phrased in terms of Java types (e.g. \texttt{java.lang.Number}) and Java operations, such as typecasting. They also come with Java stack trace which can be particularly verbose in Clojure since functional languages tend to have a large number of function calls on the stack. Clojure error messages are often confusing even to experienced programmers, and are a barrier for beginners. 
 
-In the last few years there has been a large community effort to address this issue. Several Clojure IDEs come with their own error processing system that filters our Clojure internal functions from the stack trace. There's been work done on improving error messages for macros \emcomment{cite} However, these improvements address the needs of more experienced programmers by continuing using Java types and more advanced terminology, and leave out those for whom Clojue would serve as the first introduction to programming. Our work on error messages aims at addressing beginners' needs.  
+In the last few years there has been a large community effort to address this issue. Several Clojure IDEs come with their own error processing system that filters our Clojure internal functions from the stack trace. There has been work done in Clojure community on improving error messages for macros~\cite{fleming}. However, these improvements address the needs of more experienced programmers by continuing using Java types and more advanced terminology, and leave out those for whom Clojue would serve as the first introduction to programming. By contrast, our work on error messages aims at addressing beginners' needs.  
 
-\emcomment{Just give an overview of the rest}
-
-	\subsection{Goals}\label{sec:goals}
-This work is a part of a larger project on making Clojure more accessible to beginners. In particular, we have developed an alternative system of error messages that do not use Java datatypes and other terminology that beginner programmers would not be familiar with. 
+	\subsection{Our project and the study research goals}\label{sec:goals}
+This work is a part of a larger project on making Clojure more accessible to beginners. In 2014-15 we have developed an alternative system of error messages that do not use Java datatypes or other terminology that beginner programmers would not be familiar with. 
 \emcomment{a couple of examples}
 
-While these messages seem to be an improvement, we would like to examine two hypotheses about our alternative system of Clojure error messages:
+While these messages seem to be an improvement, we would like to formally examine two hypotheses about our alternative system of Clojure error messages:
 \begin{enumerate}
 \item It is easier to understand than Clojure native error messages.
 \item It is at least as helpful as the system of error messages in the Racket programming language. \emcomment{do we need to switch this with the next section, or do we give a quick overview of Racket here?}
 \end{enumerate}
-To test these hypotheses, we have developed a comparative usability study that compares our system of error messages to the native Clojure error messages and to those in the Racket programming language. We use a series of erroneous code fragments that the test subjects need to correct, and measure how many fragments they have successfully fixed and how may steps it took them to fix the issue or make edits that make progress towards the solution. 
-Study subjects are undergraduate students with Racket background, with none, or very little, Clojure background. 
-Detailed description of this process is given in Section~\ref{sec:setup}. 
+To test these hypotheses, we have developed a comparative usability study that compares our system of error messages to the native Clojure error messages and to those in the Racket programming language. We use a series of erroneous code fragments that test subjects need to correct, and measure how many fragments they have successfully fixed and how many steps it took them to fix the issue or make edits that make progress towards the solution. 
+Study subjects are undergraduate students with Racket background who have none, or very little, Clojure background. 
+Detailed description of the study is given in Section~\ref{sec:setup}. 
 
 A statistically significant higher number of fixed code fragments and a lower number of attempts for our error messages system, compared to the native Clojure system, would indicate that our error messages are easier for students to understand. Additionally we are measuring the difference between either one of the Clojure error messages systems and the Racket messages. Racket error messages were specifically developed to be helpful for beginners. Thus, a comparison to Racket messages would indicate how our error messages compare to the expectations of error messages for beginner-friendly functional languages. 
+
+\emcomment{Just give an overview of the rest}
 
 \emcomment{Need to mention the IRB exemption somewhere: one of the Racket papers does.}
 
 
 	\hfcomment{This needs to describe error messages briefly. Reference previous project.}
 \section{Languages}\label{sec:lang}
-	\hfcomment{Henry}
+The two languages we are working with (Racket and Clojure) belong to the Lisp family of languages. 
 
 	\subsection{Overview of Lisp}\label{sec:lisp}
 
 	Lisp is a family of functional programming languages that dates from 1958, developed by John McCarthy based on Alonzo Church's lambda calculus.
-	Lisp was the first where data and program code were internally stored using the same data structure which opened possibilities for manipulating not just data, but also program code, within a program.
+	Lisp was the first language in which data and program code were internally stored using the same data structure which opened possibilities for manipulating not just data, but also program code, within a program.
 	Lisp has a distinctive fully parenthesized prefix notation, where all code and data are written as expressions in the form:
 	\begin{verbatim}
 	(<function-name> <arg 1> <arg 2> ... <arg N>)
@@ -186,7 +187,8 @@ Lists in Lisp are commonly created by using the list function
 	(list 2 4 6 8)
 	-> '(2 4 6 8)
 	\end{verbatim}
-The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as list \emcomment{as data storage?} \hfcomment{wrong, but close enough to the truth?} \emcomment{yes}	
+The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicate that the expression should not be evaluated (doing so would attempt to apply the number \texttt{2} as a function), but instead it should be treated as data storage. 
+% \emcomment{as data storage?} \hfcomment{wrong, but close enough to the truth?} \emcomment{yes}	
 	\begin{verbatim}
 	(list 2 4 6 8)
 	-> '(2 4 6 8)
@@ -200,9 +202,9 @@ The return value \texttt{'(2 4 6 8)} uses the single quote \texttt{'} to indicat
 	 
 	\subsection{Differences between Racket and Clojure}\label{sec:diff}
 	
-Racket and Clojure, while still Lisps, satisfy different design goals. 
-Racket features a set of languages with limited subsets of the full language that allow instructors to slowly introduce features to students.Clojure focuses on concurrency and integration with the Java virtual machine. 
-The differing purposes of these language have created divides in the syntax and idioms of Racket and Clojure.
+Racket and Clojure, while both Lisps, satisfy different design goals. 
+Racket features a set of language levels with limited subsets of the full language that allow instructors to slowly introduce features to students.Clojure focuses on concurrency and integration with the Java virtual machine. 
+The differing purposes of these language have created differences in the syntax and idioms of Racket and Clojure.
  The differences begin at definition of variables; Clojure defines functions with the following syntax
 
 \begin{verbatim}
@@ -217,7 +219,8 @@ Racket uses this syntax:
 	(define (plus-four x) (+ x 4))
 \end{verbatim}
 
-Racket and Clojure both have associative datatypes, and Clojure actually has two. We used hashmaps in the study, simply because they are far more common than the alternative.
+Racket and Clojure both have associative datatypes.%, and Clojure actually has two. 
+We used Clojure hashmaps in the study because they are the most common associative datatype in Clojure.
 Hashmaps in Clojure are a collection of key-value pairs: 
 
 \begin{verbatim}
