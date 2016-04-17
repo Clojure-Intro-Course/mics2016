@@ -1,0 +1,141 @@
+\documentclass{beamer}
+\usetheme{Montpellier}
+\usecolortheme{dolphin}
+
+%\usepackage{graphicx} %For jpg figure inclusion
+%\usepackage{times} %For typeface
+%\usepackage{epsfig}
+\usepackage{color} %For Comments
+\usepackage{beamerthemeshadow}
+%\usepackage[all]{xy}
+%\usepackage{float}
+%\usepackage{subfigure} 
+%\usepackage{hyperref}
+%\usepackage{url}
+%\usepackage{parskip}
+%\usepackage{multirow}
+
+%% Elena's favorite green (thanks, Fernando!)
+\definecolor{ForestGreen}{RGB}{34,139,34}
+\definecolor{BlueViolet}{RGB}{138,43,226}
+\definecolor{Coquelicot}{RGB}{255, 56, 0}
+\definecolor{Teal}{RGB}{2,132,130}
+% Uncomment this if you want to show work-in-progress comments
+\newcommand{\comment}[1]{{\bf \tt  {#1}}}
+% Uncomment this if you don't want to show comments
+%\newcommand{\comment}[1]{}
+\newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
+\newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
+\newcommand{\hfcomment}[1]{\textcolor{Teal}{\comment{Henry: {#1}}}}
+\newcommand{\thcomment}[1]{\textcolor{Coquelicot}{\comment{Thomas: {#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title{Designing a Comparative Usability Study of Error Messages}
+\date{April 23, 2016}
+
+\begin{frame}
+\frametitle{Designing a Comparative Usability Study of Error Messages}
+{\centering
+\noindent
+Henry Fellows, Thomas Hagen, Sean Stockholm, \par
+and Elena Machkasova \par
+
+{\it 
+Midwest Instruction and Computing Symposium\par
+April 23, 2016\par}
+}
+\end{frame}
+%frame
+
+\begin{frame}
+\frametitle{Table of contents}
+\tableofcontents  
+\end{frame}
+
+\section{Introduction to the Project}
+
+\begin{frame}
+	\frametitle{Clojure in an introductory course}
+	\begin{itemize}
+		\item Developed in 2007 by Rich Hickey
+		\item Member of the Lisp family
+		\item Felleisen et al found Lisp languages to be useful in introductory courses
+		\item Current UMM course uses a Lisp language
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Motivations for the project}
+	\begin{itemize}
+		\item ClojurEd
+			\begin{itemize}
+				\item ongoing project at UMM
+				\item introduce Clojure in an introductory course
+			\end{itemize}
+		\item Our work focuses on error messages in Clojure
+			\begin{itemize}
+				\item error messages are a useful learning tool
+				\item focus on usability
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Overview of Clojure}
+
+\begin{frame}
+\frametitle{Overview of Clojure}
+	\begin{itemize}
+  	 \item Dynamically typed
+  	 \item Data types immutable by default
+  	 \item Functional
+  	 \item Runs on the Java Virtual Machine (JVM)
+  	 \item Read-eval-print-loop (REPL)
+  	 	\begin{itemize}
+  	 	\item interactive environment
+  	 	\item useful for development and debugging
+  	 	\end{itemize}
+	 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Prefix notation}
+	\begin{itemize}
+  	  \item Clojure uses prefix notation
+  	  \begin{itemize}
+  	 	 \item parentheses
+  	 	 \item parameters
+  	 	 
+  	 	 \texttt{(<function-name> <argument 1> <argument 2>)}
+  	 	 \item \texttt{+} is a built-in function, not an operator
+  	 	 \begin{verbatim}		
+		 (+ 5 5)
+		 -> 10
+	     \end{verbatim}
+	  \end{itemize}
+   \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+
+\frametitle{Acknowledgments}
+	Our research was sponsored by:
+	\begin{itemize}
+	\item HHMI
+	\item UMN UROP
+          \item Coginitect, Inc proivding funding for participants' compensation 
+	\end{itemize}
+	
+	
+	{\centering
+	\noindent
+	Thank you! \par
+	Any questions? \par
+	}
+\end{frame}
+
+\end{document}
+
