@@ -56,22 +56,14 @@ April 23, 2016\par}
 \section{Introduction to the project}
 
 \begin{frame}
-	\frametitle{Clojure in an introductory course}
-	\begin{itemize}
-		\item Developed in 2007 by Rich Hickey
-		\item Member of the Lisp family
-		\item Felleisen et al found Lisp languages to be useful in introductory courses
-		\item Current UMM course uses a Lisp language
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
 \frametitle{Motivations and current state of the project}
 	\begin{itemize}
 		\item ClojurEd
 			\begin{itemize}
 				\item ongoing project at UMM
 				\item goal: use Clojure in an introductory course
+				\item Felleisen et al found Lisp languages to be useful in introductory courses
+				\item Current UMM course uses a Lisp language 
 			\end{itemize}
 		\item Our work focuses on error messages in Clojure
 			\begin{itemize}
@@ -84,26 +76,24 @@ April 23, 2016\par}
 	\end{itemize}
 \end{frame}
 
-\section{Overview of Clojure}
+\section{Overview of Racket and Clojure}
 
 \begin{frame}
-\frametitle{Overview of Clojure}
-\emcomment{Some of this can be moved to differences between Racket and Clojure, some eliminated}
-	\begin{itemize}
-  	 \item Dynamically typed
-  	 \item Data types immutable by default
-  	 \item Functional
-  	 \item Runs on the Java Virtual Machine (JVM)
+\frametitle{Lisp}
+\begin{itemize}
+	\item Clojure and Racket are Lisps
+	\item Lisp is a functional dynamically typed language
+	\item Data immutable by default
   	 \item Read-eval-print-loop (REPL)
   	 	\begin{itemize}
   	 	\item interactive environment
   	 	\item useful for development and debugging
   	 	\end{itemize}
-	 \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Prefix notation}
+\frametitle{Lisp prefix notation}
 	\begin{itemize}
   	  \item Clojure uses prefix notation
   	  \begin{itemize}
@@ -121,23 +111,43 @@ April 23, 2016\par}
 \end{frame}
 
 \begin{frame}
-\frametitle{Lisp}
+\frametitle{Overview of Clojure}
+\emcomment{Some of this can be moved to differences between Racket and Clojure, some eliminated}
+	\begin{itemize}
+  	 %\item Dynamically typed
+  	 %\item Data types immutable by default
+  	 %\item Functional
+		\item Developed in 2007 by Rich Hickey
+		\item Member of the Lisp family
+  	 \item Runs on the Java Virtual Machine (JVM)
+
+	\item \emcomment{Add more Clojure-specific features}
+	 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Lisp II}
-\end{frame}
 
 \begin{frame}
-\frametitle{Differences between Racket and Clojure}
+\frametitle{Overview of Racket}
+\emcomment{Possibly move to earlier}
 \end{frame}
 
-\begin{frame}
-\frametitle{Differences between Racket and Clojure II}
-\end{frame}
+%\begin{frame}
+%\frametitle{Differences between Racket and Clojure II}
+%\end{frame}
+
+\section{Design of the usability study} 
 
 \begin{frame}
 \frametitle{Experimental Setup}
+\begin{itemize}
+%\item Participant will be assigned an instructor
+\item Participant will be given a review of Racket
+\item Participant will be given a series of program fragments in Racket to correct
+\item Participant will be presented with a brief overview of Clojure
+\item Participant will be given a series of  program fragments in Clojure to correct (with either default Clojue messages or our messages) 
+\item The screen will be recorded at a regular intervals
+\item The participants will be asked a few questions at the end
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -154,10 +164,6 @@ April 23, 2016\par}
 
 \begin{frame}
 \frametitle{Data Evaluation}
-\end{frame}
-
-\begin{frame}
-\frametitle{Question Selection}
 \end{frame}
 
 \begin{frame}
@@ -183,16 +189,24 @@ The code examples should:
 
 
 \begin{frame}
-\frametitle{Examples}
+\frametitle{Example I}
 \end{frame}
 
 \begin{frame}
-\frametitle{Examples}
+\frametitle{Example ||}
 \end{frame}
+
+\section{Conclusions and future work} 
 
 \begin{frame}
 \frametitle{Conclusion}
-	Never do a usability study on programming languages.
+There isn't much literature about systematic evaluation of error messages.
+
+Designing a comparative usability study is challenging.
+
+We look forwr 
+
+	%Never do a usability study on programming languages.
 \end{frame}
 
 \begin{frame}
