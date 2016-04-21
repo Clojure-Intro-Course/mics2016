@@ -53,7 +53,7 @@ April 23, 2016\par}
 \tableofcontents  
 \end{frame}
 
-\section{Introduction to the Project}
+\section{Introduction to the project}
 
 \begin{frame}
 	\frametitle{Clojure in an introductory course}
@@ -66,17 +66,20 @@ April 23, 2016\par}
 \end{frame}
 
 \begin{frame}
-\frametitle{Motivations for the project}
+\frametitle{Motivations and current state of the project}
 	\begin{itemize}
 		\item ClojurEd
 			\begin{itemize}
 				\item ongoing project at UMM
-				\item introduce Clojure in an introductory course
+				\item goal: use Clojure in an introductory course
 			\end{itemize}
 		\item Our work focuses on error messages in Clojure
 			\begin{itemize}
 				\item error messages are a useful learning tool
 				\item focus on usability
+				\item summer 2016: developed an alternative system of error messages
+				\item current goal: evaluate their effectiveness
+				\item would like to compare to usual Clojure and to Racket
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -85,6 +88,7 @@ April 23, 2016\par}
 
 \begin{frame}
 \frametitle{Overview of Clojure}
+\emcomment{Some of this can be moved to differences between Racket and Clojure, some eliminated}
 	\begin{itemize}
   	 \item Dynamically typed
   	 \item Data types immutable by default
@@ -158,12 +162,13 @@ April 23, 2016\par}
 
 \begin{frame}
 	\frametitle{Meaningful \& Accessible questions}
+The code examples should: 
 	\begin{itemize}
-		\item The code examples should be simple enough to understand the programmer's intent with just a few test examples. 
-		\item The code examples must have mistakes that a beginner programmer would make. Examples include switched arguments of a function or a mistyped identifier. 
-		\item There must be a simple fix for an error. This is challenging since some errors, such as s type mismatch, can be caused by a variety of issues, and a beginner
-	programmer can easily start making changes that are more complicated than they need to be, in an attempt to match the types. 
-		\item Code examples and tests must use the same simple set of features in Racket and in Clojure. For instance, Racket uses a function \texttt{check-expect} for testing. Clojure also has a similar library (expectations), but it is more convoluted. Thus in order to equalize the experience in the two languages we chose to use only = and \texttt{equals?} function for testing since they are the same in the two languages. 
+		\item be simple enough to understand the intent with 2-3 test examples. 
+		\item have mistakes that a beginner would make (e.g. switched function arguments, a mistyped identifier...) 
+		\item be simple to fix (challenging: may  be caused by multiple issues, and a beginner; beginners may make more complex changes than needed)
+		\item use the same simple set of features in Racket and in Clojure (use \texttt{equal?} in Racket rather than \texttt{check-expect} since Clojure {\tt =} is roughly the same). 
+%For instance, Racket uses a function \texttt{check-expect} for testing. Clojure also has a similar library (expectations), but it is more convoluted. Thus in order to equalize the experience in %the two languages we chose to use only = and \texttt{equals?} function for testing since they are the same in the two languages. 
 	\end{itemize}
 \end{frame}
 
