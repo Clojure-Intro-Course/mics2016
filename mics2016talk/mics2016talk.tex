@@ -56,7 +56,7 @@ April 23, 2016\par}
 \section{Introduction to the project}
 
 \begin{frame}
-\frametitle{Motivations and current state of the project}
+\frametitle{Our project}
 	\begin{itemize}
 		\item ClojurEd
 			\begin{itemize}
@@ -66,6 +66,13 @@ April 23, 2016\par}
 				\item Functional abstraction allows clearer abstraction: separating the data from the means of interacting with that data. 
 				\item Current UMM course uses a Lisp language 
 			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Current state of the project}
+	\begin{itemize}
 		\item Our work focuses on error messages in Clojure
 			\begin{itemize}
 				\item Error messages are a useful learning tool
@@ -108,6 +115,7 @@ April 23, 2016\par}
 		 (+ 5 5)
 		 -> 10
 	     \end{verbatim}
+		\item \emcomment{Add something about anonymous functions}
 	  \end{itemize}
    \end{itemize}
 \end{frame}
@@ -140,6 +148,21 @@ April 23, 2016\par}
 %\end{frame}
 
 \section{Design of the usability study} 
+
+
+\begin{frame}
+\frametitle{Study goals}
+The goal of the usability study is to compare usability of error messages:
+\begin{itemize}
+\item Our error messages to the original Clojure.
+\item Our error messages to Racket.
+\end{itemize}
+We adapted an approach developed by Marceau, Fisler, and Krishnamurthi for evaluation of Racket error messages: does an edit after seeing an error is closer to the solution or farther? 
+
+\vspace*{.2in}
+
+Usability study: students are asked to correct several code fragments in Clojure and in Racket. 
+\end{frame}
 
 \begin{frame}
 \frametitle{Experimental Setup}
