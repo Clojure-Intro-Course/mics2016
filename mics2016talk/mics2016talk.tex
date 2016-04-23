@@ -1,4 +1,4 @@
-\documentclass{beamer}
+ \documentclass{beamer}
 \usetheme{Montpellier}
 \usecolortheme{dolphin}
 
@@ -63,7 +63,8 @@ April 23, 2016\par}
 				\item Ongoing project at UMM
 				\item Goal: use Clojure in an introductory course
 				\item Educators have found Lisp languages (e.g. Racket) to be useful in introductory courses
-				\item Functional abstraction allows clearer abstraction: separating the data from the means of interacting with that data. 
+				\item Functional abstraction allows clearer abstraction: separating the data from the means of interacting with that data
+				\item Prioritizes learning concepts, not a language
 				\item Current UMM course uses a Lisp language 
 			\end{itemize}
 	\end{itemize}
@@ -115,7 +116,8 @@ April 23, 2016\par}
 		 (+ 5 5)
 		 -> 10
 	     \end{verbatim}
-		\item \emcomment{Add something about anonymous functions}
+		\item Anonymous functions (lambdas) are a common idiom in lisp
+		
 	  \end{itemize}
    \end{itemize}
 \end{frame}
@@ -123,11 +125,13 @@ April 23, 2016\par}
 \begin{frame}
 \frametitle{Overview of Racket}
 \emcomment{Possibly move to earlier}
+
+
+\hfcomment{blerg. Not looking forward to this.}
 \end{frame}
 
 \begin{frame}
 \frametitle{Overview of Clojure}
-\emcomment{Some of this can be moved to differences between Racket and Clojure, some eliminated}
 	\begin{itemize}
 	\item Developed in 2007 by Rich Hickey
 	\item Member of the Lisp family
@@ -157,15 +161,14 @@ The goal of the usability study is to compare usability of error messages:
 \item Our error messages to the original Clojure.
 \item Our error messages to Racket.
 \end{itemize}
-We adapted an approach developed by Marceau, Fisler, and Krishnamurthi for evaluation of Racket error messages: does an edit after seeing an error is closer to the solution or farther? 
 
-\vspace*{.2in}
+We were inspired by an approach developed by Marceau, Fisler, and Krishnamurthi for evaluation of Racket error messages: does an edit made after seeing an error move the participant towards or away from the correct solution?
 
-Usability study: students are asked to correct several code fragments in Clojure and in Racket. 
 \end{frame}
 
 \begin{frame}
 \frametitle{Experimental Setup}
+	Usability study: students are asked to correct several code fragments in Clojure and in Racket. 
 	\begin{itemize}
 		\item Participant given a review of Racket
 		\item Participant given a series of program fragments in Racket to correct
