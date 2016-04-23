@@ -230,49 +230,6 @@ The code examples should:
 \frametitle{Example 1}
 Racket version:
 \begin{verbatim}
-		(define (select-even elements) 
-		  (foldl (lambda (x y) (if (even? y) (cons x y) y)) 
-                         '() elements))
-\end{verbatim}
-Clojure version:  
-\begin{verbatim}
-		(defn select-even [elements] 
-		  (reduce (fn [x y] (if (even? x) (cons y x) y))  
-                       '() elements))
-\end{verbatim}
-Test case:
-\begin{verbatim}
-		(= '(2 4 6 8) (select-even '(1 2 3 4 5 6 7 8 9)))
-\end{verbatim}
-\end{frame}
-
-
-\begin{frame}[fragile]
-\frametitle{Example 1: error messages}
-Racket error:
-\begin{verbatim}
-		even?: expects integer, given '()
-\end{verbatim}
-
-Original Clojure:
-\begin{verbatim}
-java.lang.IllegalArgumentException: 
-Argument must be an integer: 
-clojure.lang.PersistentList$EmptyList@1
-               core.clj:1355 clojure.core/even?	
-\end{verbatim}
-
-Our Clojure: 
-\begin{verbatim}
-		Error: In function even?, the first argument () must be
-		an integer number but is a list.
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Example 2}
-Racket version:
-\begin{verbatim}
 		(define (my-length elements)
   			(cond
  			 [(empty? elements) 0]
@@ -294,7 +251,7 @@ Test cases:
 
 
 \begin{frame}[fragile]
-\frametitle{Example 2: error messages}
+\frametitle{Example 1: error messages}
 Racket error:
 \begin{verbatim}
 		first: expects a non-empty list; given: 1	
@@ -313,6 +270,51 @@ Our Clojure:
 a sequence but is a number.
 \end{verbatim}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example 2}
+Racket version:
+\begin{verbatim}
+		(define (select-even elements) 
+		  (foldl (lambda (x y) (if (even? y) (cons x y) y)) 
+                         '() elements))
+\end{verbatim}
+Clojure version:  
+\begin{verbatim}
+		(defn select-even [elements] 
+		  (reduce (fn [x y] (if (even? x) (cons y x) y))  
+                       '() elements))
+\end{verbatim}
+Test case:
+\begin{verbatim}
+		(= '(2 4 6 8) (select-even '(1 2 3 4 5 6 7 8 9)))
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Example 2: error messages}
+Racket error:
+\begin{verbatim}
+		even?: expects integer, given '()
+\end{verbatim}
+
+Original Clojure:
+\begin{verbatim}
+java.lang.IllegalArgumentException: 
+Argument must be an integer: 
+clojure.lang.PersistentList$EmptyList@1
+               core.clj:1355 clojure.core/even?	
+\end{verbatim}
+
+Our Clojure: 
+\begin{verbatim}
+		Error: In function even?, the first argument () must be
+		an integer number but is a list.
+\end{verbatim}
+\end{frame}
+
+
 
 \section{Conclusions and future work} 
 
